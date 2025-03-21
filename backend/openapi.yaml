@@ -1,0 +1,864 @@
+openapi: 3.0.1
+info:
+  title: E-COM PORTFOLIO CODECADDEMY PROJECT
+  version: 1.0.0
+  description: >-
+    Part 1 of the the main portfolio project on codecademys fullstack engineer
+    course
+paths:
+  /users:
+    summary: Gets all users data
+    description: This path is used for admin use, to get all users
+    get:
+      summary: Gets all users
+      description: Retrieves all uses from the db
+      operationId: get_users
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                users:
+                  value: |-
+                    {
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "dan",
+                                "username": "dan",
+                                "email": "dan@dan.com",
+                                "password": "dan"
+                            },
+                            {
+                                "id": 2,
+                                "name": "a",
+                                "username": "a",
+                                "email": "a@a.com",
+                                "password": "a"
+                            },
+                            {
+                                "id": 3,
+                                "name": "b",
+                                "username": "b",
+                                "email": "b@b.com",
+                                "password": "b"
+                            },
+                            {
+                                "id": 4,
+                                "name": "c",
+                                "username": "c",
+                                "email": "c@c.com",
+                                "password": "c"
+                            }
+                        ]
+                    }
+      tags:
+        - admin
+  /users/{id}:
+    summary: User crud operations
+    description: This path is used perfrom crud operations of user id
+    get:
+      summary: Gets a users data
+      description: Retrieves the users data from the db
+      operationId: get_user
+      parameters:
+        - name: id
+          in: path
+          description: the id of a user
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                users:
+                  value: |-
+                    {
+                        "id": 1,
+                        "name": "dan",
+                        "username": "dan",
+                        "email": "dan@dan.com",
+                        "password": "dan"
+                    }
+      tags:
+        - users
+    delete:
+      summary: Deletes a user
+      description: >-
+        This path is used to delete a user form the db, on success redirect to
+        home page with guest account
+      operationId: delete_user
+      parameters:
+        - name: id
+          in: path
+          description: the id of a user
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                users:
+                  value: |-
+                    {
+                        "user": "guest",
+                        "guest cart": {
+                            "user": "guest",
+                            "cartTotal": "0.00",
+                            "items": []
+                        },
+                        "message": [
+                            "Successfully deleted account"
+                        ]
+                    }
+      tags:
+        - users
+    put:
+      summary: Updates a users account
+      description: >-
+        Updates an existing users account in the db, returnin gthe newly updated
+        version
+      operationId: put_user
+      parameters:
+        - name: id
+          in: path
+          description: the id of a user
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                users:
+                  value: |-
+                    {
+                      "id": 6,
+                      "name": "123",
+                      "username": "onetwothree",
+                      "email": "123",
+                      "password": "123",
+                      "createdAt": "2025-01-30T13:25:16.811Z",
+                      "updatedAt": "2025-01-30T13:32:30.495Z"
+                    }
+      tags:
+        - users
+  /users/register:
+    summary: Register a new user
+    description: >-
+      This path is used to add a new user to the db, on success redirect to home
+      page
+    post:
+      summary: Register a new user
+      description: Registers a new user to the db
+      operationId: post_user
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                new_user:
+                  value: |-
+                    {
+                        "username": "123",
+                        "user cart": {
+                            "cartId": 2,
+                            "userId": 5,
+                            "cartTotal": "0.00",
+                            "items": []
+                        },
+                        "message": "Successfully created account"
+                    }
+      tags:
+        - users
+  /users/{id}/orders:
+    summary: Gets a users orders
+    description: This path is used to retrieve a users orders from the db
+    get:
+      summary: Gets a users orders
+      description: retrieves a users orders from the db
+      operationId: get_user_orders
+      parameters:
+        - name: id
+          in: path
+          description: the id of an order
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                get_user_orders:
+                  value: |-
+                    {
+                        "user orders": {
+                            "userId": 1,
+                            "orders": [
+                                {
+                                    "orderId": 1,
+                                    "itemCount": 2,
+                                    "orderTotal": "100.00"
+                                },
+                                {
+                                    "orderId": 2,
+                                    "itemCount": 2,
+                                    "orderTotal": "69.00"
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - users
+  /users/{id}/orders/{orderid}:
+    summary: Gets a users order
+    description: This path s used to get a users order
+    get:
+      summary: Gets a users order
+      description: Retrieves a users order from the db
+      operationId: get_user_order
+      parameters:
+        - name: id
+          in: path
+          description: the id of an user
+          required: true
+          schema:
+            type: integer
+        - name: orderid
+          in: path
+          description: the id of an order
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                user orders:
+                  value: |-
+                    {
+                        "user order": {
+                            "orderTotal": "100.00",
+                            "items": [
+                                {
+                                    "name": "nike running shoes",
+                                    "price": "22.00",
+                                    "size": "8.5",
+                                    "quantity": 2
+                                },
+                                {
+                                    "name": "nike running shoes",
+                                    "price": "22.00",
+                                    "size": "8.5",
+                                    "quantity": 2
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - users
+  /categories:
+    summary: Gets all the categories data appended with children
+    description: This path is to retrieve all the categories from the db
+    get:
+      summary: Gets the categories data
+      description: Retrieves the categoris with children data from the db
+      operationId: get_categories
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                categories:
+                  value: |-
+                    {
+                        "data": {
+                            "count": 3,
+                            "rows": [
+                                {
+                                    "id": 1,
+                                    "name": "footware"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "headwear"
+                                },
+                                {
+                                    "id": 3,
+                                    "name": "clothing"
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - categories
+  /categories/{catname}:
+    summary: Get the category data
+    description: This path is used to retrieve a category from the db
+    get:
+      summary: Gets a category data
+      description: Retrieves the category from the db
+      operationId: get_category
+      parameters:
+        - name: catname
+          in: path
+          description: The name of the category
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                get_category:
+                  value: |-
+                    {
+                        "items": {
+                            "id": 1,
+                            "name": "footware",
+                            "Sub_categories": [
+                                {
+                                    "id": 1,
+                                    "name": "running shoes",
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "boots",
+                                    "category_id": 1
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - categories
+  /categories/{catname}/{subcatname}:
+    summary: Get all of the category and related subcategory data
+    description: This path is used to retrieve categories and their subcategories
+    get:
+      summary: Gets the category and realted subcategory data
+      description: Retrieves the category and related subcategroy data from the db
+      operationId: get_category_subcats
+      parameters:
+        - name: catname
+          in: path
+          description: the name of the parent category
+          required: true
+          schema:
+            type: string
+        - name: subcatname
+          in: path
+          description: The name of the child subcategory
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                get_category_with_subcat:
+                  value: |-
+                    {
+                        "data": {
+                            "id": 1,
+                            "name": "footware",
+                            "Sub_categories": [
+                                {
+                                    "id": 1,
+                                    "name": "running shoes",
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "boots",
+                                    "category_id": 1
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - categories
+  /items/all:
+    summary: Gets items data
+    description: This path is used to retrieve all items from the stores db
+    get:
+      summary: Gets items data
+      description: retrieves items from the db
+      operationId: get_items
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                items:
+                  value: |-
+                    {
+                        "items": [
+                            {
+                                "id": 1,
+                                "name": "nike running shoes",
+                                "price": "28.00",
+                                "sub_category_id": 1
+                            },
+                            {
+                                "id": 2,
+                                "name": "adidas running shoes",
+                                "price": "36.00",
+                                "sub_category_id": 1
+                            },
+                            {
+                                "id": 3,
+                                "name": "walking boots",
+                                "price": "40.00",
+                                "sub_category_id": 2
+                            },
+                            {
+                                "id": 4,
+                                "name": "football boots",
+                                "price": "19.00",
+                                "sub_category_id": 2
+                            },
+                            {
+                                "id": 5,
+                                "name": "black bomber jacket",
+                                "price": "13.00",
+                                "sub_category_id": 5
+                            }
+                        ]
+                    }
+      tags:
+        - items
+  /items/{id}:
+    summary: Gets a specific item
+    description: This path is used for retrieving an item from the db
+    get:
+      summary: Gets item data
+      description: Retrieves an item data from the db
+      operationId: get_item
+      parameters:
+        - name: id
+          in: path
+          description: The id of the item
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                items:
+                  value: |-
+                    {
+                        "item": {
+                            "id": 1,
+                            "name": "nike running shoes",
+                            "price": "23.00",
+                            "sub_category_id": 1
+                        }
+                    }
+      tags:
+        - items
+  /search:
+    summary: Gets search results data
+    description: This path is used to retrieve data from a users search results
+    get:
+      summary: Gets search-related data
+      description: Retrieves data related to the search query from the database.
+      operationId: get_search
+      parameters:
+        - name: q
+          in: query
+          description: The search query parameter (e.g., "adidas").
+          required: true
+          schema:
+            type: string
+            example: adidas
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                search_query_adidas:
+                  value: |-
+                    {
+                        "search results": {
+                            "items": [
+                                {
+                                    "id": 2,
+                                    "name": "adidas running shoes",
+                                    "price": "44.00",
+                                    "sub_category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "name": "adidas hat",
+                                    "price": "10.00",
+                                    "sub_category_id": 6
+                                }
+                            ],
+                            "categories": [],
+                            "subCategories": []
+                        }
+                    }
+      tags:
+        - search
+  /orders:
+    summary: Gets all  orers from the  db
+    description: This path is used to retrieve all orer from  the db
+    get:
+      summary: Gets all orders data
+      description: Retrieves all orders info from  the db
+      operationId: get_orders
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                all_orders:
+                  value: |-
+                    {
+                        "all orders": {
+                            "count": 2,
+                            "rows": [
+                                {
+                                    "id": 1,
+                                    "user_id": 1,
+                                    "guest_id": null,
+                                    "order_total": "100.00"
+                                },
+                                {
+                                    "id": 2,
+                                    "user_id": null,
+                                    "guest_id": 1,
+                                    "order_total": "50.00"
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - orders
+  /orders/order/{id}/summary:
+    summary: 'Gets an orders from the db and displays an overall summary '
+    description: 'This path is used to retrieve an order from the db '
+    get:
+      summary: Gets an order from the db to display an order summary
+      description: Retries an orer from the db
+      operationId: get_order_summary
+      parameters:
+        - name: id
+          in: path
+          description: the id of an order
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                get_order_summary:
+                  value: |-
+                    {
+                        "data": {
+                            "user_id": 1,
+                            "orderTotal": "55.00",
+                            "items": [
+                                {
+                                    "itemId": 2,
+                                    "name": "black bomber jacket",
+                                    "price": "17.00",
+                                    "quantity": 1,
+                                    "size": "L",
+                                    "price_X_quantity": "17.00"
+                                },
+                                {
+                                    "itemId": 1,
+                                    "name": "nike running shoes",
+                                    "price": "38.00",
+                                    "quantity": 1,
+                                    "size": "8.5",
+                                    "price_X_quantity": "38.00"
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - orders
+  /logout:
+    summary: Logs out a user
+    description: This path is used to logout an existing user
+    post:
+      summary: Logs out user
+      description: Logs user out of current session
+      operationId: log_out_user
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                logout:
+                  value: |-
+                    {
+                        "user": "guest",
+                        "guest cart": {
+                            "user": "guest",
+                            "cartTotal": "0.00",
+                            "items": []
+                        },
+                        "message": "Successfully logged out"
+                    }
+      tags:
+        - user session
+  /account/login:
+    summary: Logs in a user
+    description: This path is used to log in an existing user and retrieve users data
+    post:
+      summary: logs in user and gets users data after successful login from the db
+      description: Retrieves a users data from the db on successful login
+      operationId: login_user
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                login_user:
+                  value: |-
+                    {
+                        "username": "dan",
+                        "user cart": {
+                            "cartId": 1,
+                            "userId": 1,
+                            "cartTotal": "0.00",
+                            "items": []
+                        },
+                        "message": "Successfully logged in"
+                    }
+      tags:
+        - user session
+  /cart:
+    summary: Deletes a  users cart from the db
+    description: TRhis path is used to delete a users cart form the db
+    delete:
+      summary: Deletes a users cart form  the db
+      description: Deletes a users cart from  the db and displays emptied cart
+      operationId: delete_cart
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                cart:
+                  value: |-
+                    {
+                        "message": "successfully emptied cart"
+                    }
+      tags:
+        - cart
+  /cart/view:
+    summary: 'Gets the current cart for the session '
+    description: >-
+      This path is used to retrieve the sessions cart, users cart will be from
+      the db
+    get:
+      summary: Gets current session cart
+      description: Retrieves current cart from session( user cart from the db)
+      operationId: get_cart_view
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                session_cart:
+                  value: |-
+                    {
+                        "guest cart": {
+                            "user": "guest",
+                            "cartTotal": "399.00",
+                            "items": [
+                                {
+                                    "id": 1,
+                                    "name": "nike running shoes",
+                                    "price": "38.00",
+                                    "quantity": 10,
+                                    "size": "2"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "adidas running shoes",
+                                    "price": "19.00",
+                                    "quantity": 1,
+                                    "size": "7"
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - cart
+  /cart/add:
+    summary: 'Adds an item to the session cart  / db '
+    description: This path is used to add an item to  the session cart / users cart in db
+    post:
+      summary: Adds item to cart
+      description: Adds an irem to the session cart / user db cart
+      operationId: add_to_cart
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                add_to_cart:
+                  value: |-
+                    {
+                        "guest cart": {
+                            "user": "guest",
+                            "cartTotal": "399.00",
+                            "items": [
+                                {
+                                    "id": 1,
+                                    "name": "nike running shoes",
+                                    "price": "38.00",
+                                    "quantity": 10,
+                                    "size": "2"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "adidas running shoes",
+                                    "price": "19.00",
+                                    "quantity": 1,
+                                    "size": "7"
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - cart
+  /cart/checkout:
+    summary: Checks out guest or users cart to place an order
+    description: This path is used to do checks on processing a guest / user cart
+    post:
+      summary: Checks out guest or users cart to place an order
+      description: Used for checks on processing a users/ guest cart
+      operationId: cart_checkout
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                cart_checkout:
+                  value: |-
+                    {
+                        "data": {
+                            "guest_id": 1,
+                            "orderTotal": "300.00",
+                            "items": [
+                                {
+                                    "itemId": 5,
+                                    "name": "nike running shoes",
+                                    "price": "30.00",
+                                    "quantity": 10,
+                                    "size": "2",
+                                    "price_X_quantity": "300.00"
+                                }
+                            ]
+                        }
+                    }
+      tags:
+        - cart
+  /cart/items/{id}:
+    summary: Deletes an item form the cart
+    description: >-
+      this  path is  used to  delete  a n item in the sesion cart / user cart in
+      db
+    delete:
+      summary: Deletes an item from session cart
+      description: 'deletes  an  item from the session cart / user cart in db '
+      operationId: delete_item_from_cart
+      parameters:
+        - name: id
+          in: path
+          description: the id of an  item
+          required: true
+          schema:
+            type: integer
+      tags:
+        - cart
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                delete_item:
+                  value: |-
+                    {
+                        "guest cart": {
+                            "user": "guest",
+                            "cartTotal": "0.00",
+                            "items": []
+                        },
+                        "message": "Successfully removed item from the cart"
+                    }
+  /cart/{userid}:
+    summary: Gets a users cart from  db
+    description: >-
+      This path is used to retrieve a users cart from the db  and tie  in with
+      other cart operations
+    get:
+      summary: Gets a users cart from the db
+      description: retrieves a users cart from the db
+      operationId: get_usr_cart
+      parameters:
+        - name: userid
+          in: path
+          description: the user id of an cart
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Request successful. The server has responded as required.
+          content:
+            application/json:
+              examples:
+                get user cart:
+                  value: |-
+                    parameters:
+                            - name: id
+                              in: path
+                              description: the id of an  item
+                              required: true
+                              schema:
+                                type: integer
+      tags:
+        - cart

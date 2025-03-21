@@ -1,0 +1,188 @@
+const express = require("express"); // express
+const app = express(); // express
+const PORT = 5000; //port || env.port
+const morgan = require("morgan"); //logging
+const passport = require("passport"); //passport
+const process = require("node:process");
+
+//front end interactions
+const cors = require("cors");
+
+//process / node depreciation warnings
+
+process.on("warning", (warning) => {
+  console.log("warning", warning.stack);
+});
+// const LocalStrategy = require("passport-local").Strategy;
+const session = require("express-session"); //session
+const flash = require("connect-flash");
+
+// const { getInitialCats } = require("./controllers/categoryController");
+const Cart = require("./src/services/cart/CartServices");
+const GuestCart = require("./src/services/cart/GuestCartServices");
+
+//middleware
+app.use(cors());
+app.use(morgan("dev")); //logging
+app.use(express.json()); //json-parsing
+app.use(express.urlencoded({ extended: true })); //json-parsing
+
+/**
+ SESSION MIDDLEWARE
+*/
+app.use(
+  session({
+    secret: "secretstring",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 100000,
+      secure: false,
+    },
+  })
+);
+app.use(flash());
+/**
+ * PASSPORT MIDDLEWARE
+ */
+app.use(passport.initialize());
+app.use(passport.session()); // Add this to manage user session
+
+/*
+ middleware temp
+*/
+const checkLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.status(401).send("Unauthorized path, log in to gain access");
+};
+app.use("/", (req, res, next) => {
+  req.isAdmin = true;
+  next();
+});
+
+
+app.use("/", (req, res, next) => {
+  if (!req.session.cart) {
+    req.session.cart = [];
+  }
+  return next();
+});
+app.use("/", async (req, res, next) => {
+  if (req.user) {
+    if (!req.session.userCart) {
+      const userCart = new Cart(req.user.id);
+      req.session.userCart = await userCart.getCart(); // Cache the user's cart in the session
+    }
+    req.user.cart = req.session.userCart; // Use the session-stored cart
+  }
+
+  const guestCart = new GuestCart(req.session.cart);
+  req.session.guestCart = await guestCart.guestCart();
+
+  return next();
+});
+/**
+ USER ROUTERS 
+*/
+const usersRouter = require("./src/routes/userRoutes");
+app.use("/users", usersRouter);
+
+/**
+ ORDER ROUTERS 
+*/
+
+const ordersRouter = require("./src/routes/orderRoutes");
+app.use("/orders", ordersRouter);
+
+/**
+ CATEGORY & SUB CATEGORY ROUTES  
+*/
+const categoryRouter = require("./src/routes/categoryRoutes");
+app.use("/categories", categoryRouter);
+
+/**
+ ITEM ROUTES  
+*/
+const itemRouter = require("./src/routes/itemRoutes");
+app.use("/items", itemRouter);
+
+/** CART ROUTES */
+
+const cartRouter = require("./src/routes/cartRoutes");
+app.use("/cart", cartRouter);
+
+/**
+ search ROUTES 
+*/
+const searchRouter = require("./src/routes/searchRoutes");
+app.use("/search", searchRouter);
+
+/*
+LOGIN / LOGOUT
+*/
+const loginRouter = require("./src/routes/loginRoutes");
+app.use("/account/", loginRouter);
+
+const logoutRouter = require("./src/routes/logoutRoutes");
+app.use("/logout", logoutRouter);
+
+/**
+ TEST ROUTES 
+*/
+const testRouter = require("./src/routes/admin/testRoutes");
+app.use("/test", testRouter);
+
+app.get("/", (req, res) => {
+  return res.send({message: "HELLO FRONTEND"});
+});
+/** 
+ * 
+ HOME PAGE 
+*/
+
+app.get("/", async (req, res) => {
+  const loginMessage = req.flash("login")[0];
+  const loggedOutMessage = req.flash("loggedOut")[0];
+  const accountDelete = req.flash("notification")[0];
+  const userCreated = req.flash("usercreated")[0];
+
+  console.log("here", loginMessage);
+  if (!req.session.cart) {
+    req.session.cart = [];
+  }
+  if (req.user) {
+    res.status(200).send({
+      username: req.user.username,
+      "user cart": req.user.cart || [],
+      message: loginMessage ?? userCreated,
+    });
+  } else {
+    res.status(200).send({
+      user: "guest",
+      "guest cart": req.session.guestCart,
+      message: accountDelete ?? loggedOutMessage,
+    });
+  }
+});
+
+app.get("/auth/check", (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.status(200).send(`user: ${req.user.username}: "logged in"`);
+  } else {
+    return res.status(401).send("no user logged in");
+  }
+});
+
+/**
+ PORT LISTEN
+*/
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

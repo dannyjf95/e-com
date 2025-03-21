@@ -1,0 +1,65 @@
+-- route checkes 11/11
+--user ✅
+--orders ✅
+--search ✅
+--login ✅
+--logout✅
+--items ✅
+--category ✅
+--cart ✅
+
+--refactor and services 
+--user ✅
+--orders ✅
+--search ✅
+--login ✅
+--logout ✅
+--items ✅
+--category ✅
+sub_category 
+--cart ✅
+
+
+--basic testing
+cart 
+- add/edit (checks if exists and updates quantity)
+- delete
+
+
+
+// main page with first retirves 
+- items
+- categories
+- subcategories
+- user
+
+//  swagger 
+- items/products -
+    - items
+    - item
+
+- categories -
+    - /catrgories (all)
+    - category
+    - category/subcatname
+ fix  deletion error  on cart  view  after delting item
+
+
+
+    tweak cart items to check if the same item a nd size exist else add the same item and  do the same for color too
+
+    explore seperate update function to  minimize line sin addToCart and better practice/readabilitly
+
+
+    
+
+api documentation swagger editor/openapi.yaml
+
+- cart
+- category ✅
+- item ✅
+- login ✅
+- logout ✅
+- order ✅
+- search ✅
+- user ✅
