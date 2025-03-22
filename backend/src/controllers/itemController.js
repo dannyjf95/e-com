@@ -16,7 +16,7 @@ const getItems = async (req, res) => {
     return res.status(200).json({ items: result });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Something went wrong" });
+    return res.status(500).json({ error: "Something went wrong while fetching items" });
   }
 };
 
@@ -25,7 +25,7 @@ const getItem = async (req, res) => {
   
   try {
     const result = await  itemInstance.getItem(req);
-console.log(result)
+
     if (!result) {
       return res.status(404).json({ message: "items not found" });
     }
@@ -33,7 +33,7 @@ console.log(result)
     return res.status(200).json({ item: result });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Something went wrong" });
+    return res.status(500).json({ error: "Something went wrong while fetching item" });
   }
 };
 

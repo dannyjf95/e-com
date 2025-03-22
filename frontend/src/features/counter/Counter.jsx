@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCount, increment } from "../app/store/counterSlice/countSlice";
+import { selectCount, increment } from "./countSlice";
 
 export default function Counter() {
   //select &  dispatch

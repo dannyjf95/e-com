@@ -18,7 +18,7 @@ class Item {
   
   async getItem(req) {
     return await models.Items.findOne({
-      where: { id: 1 },
+      where: { id: req.params.id },
     });
   }
 }

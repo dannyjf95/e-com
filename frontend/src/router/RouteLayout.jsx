@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Outlet } from "react-router-dom";
-import Hero from "./Hero";
+import Hero from "../components/Hero";
 
-export default function Root() {
+export default function RootLayout() {
   return (
     <>
       <Hero />
