@@ -36,7 +36,7 @@ const getItem = async (req, res) => {
     return res.status(500).json({ error: "Something went wrong while fetching item" });
   }
 };
-
+ 
 module.exports = {
   getItems,
   getItem,
