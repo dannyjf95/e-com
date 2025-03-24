@@ -22,7 +22,10 @@ const Cart = require("./src/services/cart/CartServices");
 const GuestCart = require("./src/services/cart/GuestCartServices");
 
 //middleware
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true, // This is required for cookies/sessions
+}));
 app.use(morgan("dev")); //logging
 app.use(express.json()); //json-parsing
 app.use(express.urlencoded({ extended: true })); //json-parsing
@@ -34,13 +37,16 @@ app.use(
   session({
     secret: "secretstring",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false, 
     cookie: {
-      maxAge: 100000,
-      secure: false,
+      maxAge: 5000, // 30 minutes
+      httpOnly: true, 
+      secure: false, // Set to true if using HTTPS
+      sameSite: "lax", // Allows cookies to be sent across different origins
     },
   })
 );
+
 app.use(flash());
 /**
  * PASSPORT MIDDLEWARE
@@ -134,9 +140,7 @@ app.use("/logout", logoutRouter);
 const testRouter = require("./src/routes/admin/testRoutes");
 app.use("/test", testRouter);
 
-app.get("/", (req, res) => {
-  return res.send({message: "HELLO FRONTEND"});
-});
+
 /** 
  * 
  HOME PAGE 

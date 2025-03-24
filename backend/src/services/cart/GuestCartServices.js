@@ -17,6 +17,7 @@ class GuestCart {
   }
 
   async getCart() {
+    console.log|('hit')
     console.log(this.req.session.cart);
     return await this.mappedCart();
   }

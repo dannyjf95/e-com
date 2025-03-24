@@ -17,74 +17,63 @@ const getCart = async (req, res) => {
 };
 
 const addToCart = async (req, res) => {
-  const reqItem = req.body.item; // Example: { id: 1, name: 'Item', price: 69, quantity: 1 }
-  // console.log('here',  reqItem);
+  const reqItem = req.body.item;
+console.log('here',  req.session.cookie)
   try {
+    // Check if the user is logged in
     if (req.user) {
       const result = await models.sequelize.transaction(async (transaction) => {
-        //source
         const userCart = new Cart(req.user.id);
         await userCart.findUserCart(transaction);
 
-        //action
         const existingItem = await userCart.getCartItem(reqItem);
-
         if (!existingItem) {
-          //works  for LOGGED IN ONLY
           await userCart.createItem(reqItem, transaction);
         } else {
-          await userCart.updateItem(
-            reqItem,
-            existingItem.dataValues,
-            transaction
-          );
+          await userCart.updateItem(reqItem, existingItem.dataValues, transaction);
         }
-        // else if (
-        //   existingItem.dataValues.id &&
-        //   existingItem.dataValues.size === req.body.item.size
-        // ) {
-        //   await userCart.updateItem(reqItem, transaction);
-        // }
 
         const updatedTotal = await userCart.getCartPrice(transaction);
         await userCart.updateCartPrice(updatedTotal, transaction);
 
-        //results
-        return (req.session.userCart = await userCart.getCart());
+        // Save updated cart to session
+        req.session.userCart = await userCart.getCart();
+        console.log("Updated session cart for user:", req.session.userCart);
+        return req.session.userCart;
       });
+
       return res.status(200).json({ "user cart": result });
     }
-    /**
-      session cart
-    */
+
+    // Handle guest users (if the user is not logged in)
     if (!req.session.cart) {
       req.session.cart = [];
     }
-    // req.session.cart = []
-    const guestCart = new GuestCart(req.session.cart);
 
+    const guestCart = new GuestCart(req.session.cart);
     let updated = false;
+
+    // Update the cart for the guest
     for (let item of guestCart.cart) {
-      if (item.id === reqItem.id) {
-        if (item.size === reqItem.size) {
-          item.quantity = reqItem.quantity;
-          updated = true;
-        }
+      if (item.id === reqItem.id && item.size === reqItem.size) {
+        item.quantity = reqItem.quantity;
+        updated = true;
       }
     }
+
     if (!updated) {
       req.session.cart.push(reqItem);
     }
-    //for testing the catch 500 error
-    // throw Error()
+
+    console.log("Updated session cart for guest:", req.session.cart);
     return res.status(200).json({ "guest cart": await guestCart.guestCart() });
   } catch (error) {
     console.log(error);
-    return res
-      .status(500)
-      .json({ error: "Something went wrong", errorMessage: error });
+    return res.status(500).json({ error: "Something went wrong", errorMessage: error });
   }
 };
+  
+
 
 const deleteItem = async (req, res) => {
   try {
@@ -170,29 +159,32 @@ const deleteCart = async (req, res) => {
 };
 
 const cartView = async (req, res) => {
+  console.log("Session:", req.session);  // Log the session for debugging
   try {
+    // If logged in
     if (req.user) {
-      //source
       const userCart = new Cart(req.user.id);
-      //action
       if (userCart) {
-        req.user.cart = (await userCart.mappedCart(req.user.id)) || [];
+        req.user.cart = await userCart.mappedCart(req.user.id);  // Assuming mappedCart returns the cart
         return res.status(200).json({ "user cart": req.user.cart });
       }
       return res.status(404).json({ message: "Cart not found" });
     }
-    //results
-    const guestCart = new GuestCart(req.session.cart, req);
-    // req.session.cart = req.session.cart = await guestCart.getCart();
 
+    // For guest users (not logged in)
+    if (!req.session.cart) {
+      req.session.cart = [];  // Initialize if empty
+    }
+
+    const guestCart = new GuestCart(req.session.cart, req);
+    console.log("Guest Cart:", req.session.cart);  // Log guest cart for debugging
     return res.status(200).json({ "guest cart": await guestCart.getCart() });
   } catch (error) {
     console.log(error.message);
-    res
-      .status(500)
-      .json({ error: "Something went wrong", errorMessage: error.message });
+    return res.status(500).json({ error: "Something went wrong", errorMessage: error.message });
   }
 };
+
 
 //middleware checks before checkout
 const cartCheckout = async (req, res) => {

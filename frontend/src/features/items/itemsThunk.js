@@ -1,18 +1,10 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { thunkCreator } from "../../utils/thunkCreator";
+const API_ITEMS = import.meta.env.VITE_API_ENDPOINT_ITEMS;
 
-const api = "http://localhost:5000/items/1";
-
-export const fetchItems = createAsyncThunk("items/fetchItems", async (_, thunkAPI) => {
-  try {
-    const response = await fetch(api);
-    if (!response.ok) {
-      const errorInfo = await response.json();
-      return thunkAPI.rejectWithValue(errorInfo);
-    }
-    const data = await response.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue({ error: "Something went wrong while fetching items" });
-  }
+export const fetchItems = thunkCreator({
+  thunktype: "items/fetchItems",
+  apiEndpoint: API_ITEMS,
+  dataKey: "items",
+  method: "GET",
+  body: null,
 });

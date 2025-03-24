@@ -21,13 +21,14 @@ export const itemsSlice = createSlice({
     });
     builder.addCase(fetchItems.rejected, (state, action) => {
       state.itemFetchLoading = false;
-      state.itemFetchError = action.payload.error || "";
+      state.itemFetchError = action.payload || "";
     });
   },
 });
 
 export const selectItems = (state) => state.items;
-
+// export const selectItemFetchLoading = (state) => state.itemFetchLoading;
+// export const selectItemFetchError = (state) => state.itemFetchError;
 export const {} = itemsSlice.actions;
 
 export default itemsSlice.reducer;

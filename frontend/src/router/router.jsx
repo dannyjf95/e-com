@@ -5,6 +5,8 @@ import Root from "./RouteLayout";
 import Counter from "../features/counter/Counter";
 // import Hero from "./components/Hero";
 import Items from "../features/items/Items";
+import Cart from "../features/cart/cart";
+import Login from "../features/login/Login";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -12,6 +14,8 @@ export const router = createBrowserRouter(
       {/* <Route index element={<Hero />} /> */}
       <Route path="counter" element={<Counter />} />
       <Route path="/items/all" element={<Items />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/login" element={<Login />} />
     </Route>
   )
 );
