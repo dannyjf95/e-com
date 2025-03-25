@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchItems } from "./itemsThunk";
 import { selectItems } from "./itemsSlice";
 
 export default function Items() {
   const { items, itemFetchLoading, itemFetchError } = useSelector(selectItems);
-  // const loading = useSelector(selectItemFetchLoading);
-  // console.log(itemFetchLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("items Component Rendered");
     dispatch(fetchItems());
-  }, []);
-  
+  }, [dispatch]);
+
   return (
     <div>
       {itemFetchLoading ? (

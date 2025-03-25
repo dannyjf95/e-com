@@ -9,22 +9,22 @@ export default function Cart() {
     },
   };
 
-  useEffect(() => {
-    // setTimeout(() => {
-    const addToCart = async () => {
-      const res = await fetch("http://localhost:5000/cart/add", {
-        method: "POST",
-        headers: { "Content-Type": " application/json" },
-        body: body ? JSON.stringify(body) : null,
-        credentials: "include", // Include cookies in the request
-      });
-      const data = await res.json();
-      console.log(data);
-      //   setCart(data);
-      return data;
-    };
-    addToCart();
-    // }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   // setTimeout(() => {
+  //   const addToCart = async () => {
+  //     const res = await fetch("http://localhost:5000/cart/add", {
+  //       method: "POST",
+  //       headers: { "Content-Type": " application/json" },
+  //       body: body ? JSON.stringify(body) : null,
+  //       credentials: "include", // Include cookies in the request
+  //     });
+  //     const data = await res.json();
+  //     console.log(data);
+  //     //   setCart(data);
+  //     return data;
+  //   };
+  //   addToCart();
+  //   // }, 3000);
+  // }, []);
   return <div>cart</div>;
 }

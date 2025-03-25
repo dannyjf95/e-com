@@ -1,8 +1,8 @@
 import { thunkCreator } from "../../utils/thunkCreator";
-const API_ITEMS = import.meta.env.VITE_API_ENDPOINT_ITEMS;
+const API_ITEMS = "http://localhost:5000/items";
 
 export const fetchItems = thunkCreator({
-  thunktype: "items/fetchItems",
+  actionType: "items/fetchItems",
   apiEndpoint: API_ITEMS,
   dataKey: "items",
   method: "GET",

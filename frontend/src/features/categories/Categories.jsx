@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "./categoriesThunk";
+import { selectCategories } from "./categoriesSlice";
 
 export default function Categories() {
-  return (
-    <div>Categories</div>
-  )
+  const categories = useSelector(selectCategories);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("Category Component Rendered");
+    dispatch(fetchCategories());
+  }, [dispatch]);
+  
+  return <div>Categories</div>;
 }

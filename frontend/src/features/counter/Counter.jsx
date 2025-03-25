@@ -7,6 +7,7 @@ export default function Counter() {
   const countSelector = useSelector(selectCount);
   const dispatch = useDispatch();
   //
+  console.log("Counter Component Rendered");
   return (
     <>
       <div className="card">

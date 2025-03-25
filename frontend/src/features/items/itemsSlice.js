@@ -27,8 +27,6 @@ export const itemsSlice = createSlice({
 });
 
 export const selectItems = (state) => state.items;
-// export const selectItemFetchLoading = (state) => state.itemFetchLoading;
-// export const selectItemFetchError = (state) => state.itemFetchError;
 export const {} = itemsSlice.actions;
 
 export default itemsSlice.reducer;
