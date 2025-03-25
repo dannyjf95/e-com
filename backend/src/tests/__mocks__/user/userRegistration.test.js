@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../../../server"); // Ensure this path is correct
+const app = require("../../../../server"); // Ensure this path is correct
 const models = require("../../../../models");
 
 afterAll(async () => {

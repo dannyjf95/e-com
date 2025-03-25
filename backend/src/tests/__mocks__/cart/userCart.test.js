@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../../../server"); // Ensure this path is correct
+const app = require("../../../../server"); // Ensure this path is correct
 const models = require("../../../../models");
 const Cart = require("../../../services/cart/CartServices");
 
@@ -83,19 +83,19 @@ describe("POST user cart management", () => {
         cartTotal: "110.00",
         items: [
           {
-            id: 1,
-            quantity: 1,
-            name: "nike running shoes",
-            price: "22.00",
-            size: "8.5",
-          },
-          {
-            id: 2,
-            quantity: 2,
-            name: "adidas running shoes",
-            price: "44.00",
-            size: "8.5",
-          },
+            "id": 2,
+            "quantity": 2,
+            "name": "adidas running shoes",
+            "price": "44.00",
+            "size": "8.5"
+        },
+        {
+            "id": 1,
+            "quantity": 1,
+            "name": "nike running shoes",
+            "price": "22.00",
+            "size": "8.5"
+        }
         ],
       },
     });

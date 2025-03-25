@@ -18,7 +18,7 @@ const getCart = async (req, res) => {
 
 const addToCart = async (req, res) => {
   const reqItem = req.body.item;
-console.log('here',  req.session.cookie)
+
   try {
     // Check if the user is logged in
     if (req.user) {

@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../../../server"); // Ensure this path is correct
+const app = require("../../../../server"); // Ensure this path is correct
 const models = require("../../../../models");
 const Cart = require("../../../services/cart/CartServices");
 
@@ -66,7 +66,7 @@ describe("GET user/guest realted search query results", () => {
   it("should should return items, categories and sub categories realted to search query", async () => {
     // toContainEqual for a single object
     const search = await agent.get("/search?q=running%20footware");
-
+    console.log(search.body);
     expect(search.body).toMatchObject({
       "search results": {
         items: [
@@ -99,6 +99,4 @@ describe("GET user/guest realted search query results", () => {
       },
     });
   });
-
-  
 });

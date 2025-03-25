@@ -1,0 +1,5 @@
+change these prices in postbird to have passing tests
+
+
+1	nike running shoes	    22.00		
+2	adidas running shoes    44.00	

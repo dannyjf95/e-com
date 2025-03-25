@@ -15,7 +15,6 @@ export const categoriesSlice = createSlice({
       state.categoriesFetchError = null;
     });
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
-   
       state.categoriesFetchLoading = false;
       state.categoriesFetchError = null;
       state.categories = action.payload;

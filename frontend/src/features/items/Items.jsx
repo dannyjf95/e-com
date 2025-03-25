@@ -8,7 +8,7 @@ export default function Items() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("items Component Rendered");
+    // console.log("items Component Rendered");
     dispatch(fetchItems());
   }, [dispatch]);
 

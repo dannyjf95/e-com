@@ -26,6 +26,7 @@ class Search {
           })),
         },
       },
+      order:[['id', 'asc']],
       raw: true,
     });
   }
