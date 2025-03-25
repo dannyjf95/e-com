@@ -4,6 +4,7 @@ const PORT = 5000; //port || env.port
 const morgan = require("morgan"); //logging
 const passport = require("passport"); //passport
 const process = require("node:process");
+const path = require('path');
 
 //front end interactions
 const cors = require("cors");
@@ -53,6 +54,9 @@ app.use(flash());
  */
 app.use(passport.initialize());
 app.use(passport.session()); // Add this to manage user session
+
+
+
 
 /*
  middleware temp

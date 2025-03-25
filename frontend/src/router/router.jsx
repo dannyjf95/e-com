@@ -19,8 +19,9 @@ export const router = createBrowserRouter(
       }
     >
       {/* <Route index element={<Hero />} /> */}
+            
       <Route path="counter" element={<Counter />} />
-      <Route path="items/all" element={<Items />} />
+      <Route path="items" element={<Items />} />
       <Route path="cart" element={<Cart />} />
       <Route path="login" element={<Login />} />
       <Route path="categories" element={<Categories />} />

@@ -18,9 +18,10 @@ export default function Hero() {
         </a>
       </div>
       <div className="nav">
+        <Link to={"/"}>Home</Link>
         <Link to={"/counter"}>Counter</Link>
 
-        <Link to={"/items/all"}>Items</Link>
+        <Link to={"/items"}>Items</Link>
 
         <Link to={"/cart"}>Cart</Link>
 

@@ -19,7 +19,7 @@ export const thunkCreator = ({ actionType, apiEndpoint, dataKey = null, method =
       console.log("✅ Fetch success:", apiEndpoint, data);
       return dataKey ? data[dataKey] : data;
     } catch (error) {
-      console.error("❌ API Error:", apiEndpoint, error);
+      // console.error("❌ API Error:", apiEndpoint, error);
       return thunkAPI.rejectWithValue({ error: "Something went wrong while fetching" });
     }
   });

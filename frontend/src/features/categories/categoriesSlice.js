@@ -21,11 +21,12 @@ export const categoriesSlice = createSlice({
     });
     builder.addCase(fetchCategories.rejected, (state, action) => {
       state.categoriesFetchLoading = false;
-      state.categoriesFetchError = action.payload || "";
+      state.categoriesFetchError = action.payload.categories || "";
     });
   },
 });
 export const selectCategories = (state) => state.categories;
+
 export const {} = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

@@ -5,22 +5,18 @@ import { selectCategories } from "./categoriesSlice";
 
 export default function Categories() {
   const { categories, categoriesFetchLoading, categoriesFetchError } = useSelector(selectCategories);
-  console.log(categoriesFetchLoading, categoriesFetchError);
+
   const dispatch = useDispatch();
   useEffect(() => {
     // console.log("Category Component Rendered");
     dispatch(fetchCategories());
   }, []);
-  // console.log(categories);
+  console.log(categories);
   return (
     <div>
-      {categoriesFetchLoading ? (
-        <p>loading</p>
-      ) : categories.length > 0 ? (
-        <pre>{JSON.stringify(categories, null, 3)}</pre>
-      ) : (
-        <p>{categoriesFetchError && categoriesFetchError}</p>
-      )}
+      <p>{categoriesFetchError && categoriesFetchError.error}</p>
+      {categoriesFetchLoading && <p>loading</p>}
+      {categories.rows && <pre>{JSON.stringify(categories.rows, null, 3)}</pre>}
     </div>
   );
 }
