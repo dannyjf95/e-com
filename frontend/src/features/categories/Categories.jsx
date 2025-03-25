@@ -5,12 +5,13 @@ import { selectCategories } from "./categoriesSlice";
 
 export default function Categories() {
   const { categories, categoriesFetchLoading, categoriesFetchError } = useSelector(selectCategories);
+  console.log(categoriesFetchLoading, categoriesFetchError);
   const dispatch = useDispatch();
   useEffect(() => {
     // console.log("Category Component Rendered");
     dispatch(fetchCategories());
   }, []);
-  console.log(categories);
+  // console.log(categories);
   return (
     <div>
       {categoriesFetchLoading ? (
@@ -23,4 +24,3 @@ export default function Categories() {
     </div>
   );
 }
- 
