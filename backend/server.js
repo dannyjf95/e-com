@@ -4,7 +4,7 @@ const PORT = 5000; //port || env.port
 const morgan = require("morgan"); //logging
 const passport = require("passport"); //passport
 const process = require("node:process");
-const path = require('path');
+const path = require("path");
 
 //front end interactions
 const cors = require("cors");
@@ -23,10 +23,12 @@ const Cart = require("./src/services/cart/CartServices");
 const GuestCart = require("./src/services/cart/GuestCartServices");
 
 //middleware
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true, // This is required for cookies/sessions
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true, // This is required for cookies/sessions
+  })
+);
 app.use(morgan("dev")); //logging
 app.use(express.json()); //json-parsing
 app.use(express.urlencoded({ extended: true })); //json-parsing
@@ -38,10 +40,10 @@ app.use(
   session({
     secret: "secretstring",
     resave: false,
-    saveUninitialized: false, 
+    saveUninitialized: false,
     cookie: {
       maxAge: 5000, // 30 minutes
-      httpOnly: true, 
+      httpOnly: true,
       secure: false, // Set to true if using HTTPS
       sameSite: "lax", // Allows cookies to be sent across different origins
     },
@@ -54,9 +56,6 @@ app.use(flash());
  */
 app.use(passport.initialize());
 app.use(passport.session()); // Add this to manage user session
-
- 
-
 
 /*
  middleware temp
@@ -72,14 +71,15 @@ app.use("/", (req, res, next) => {
   next();
 });
 
+// app.use("/", (req, res, next) => {
+//   return next();
+// });
 
-app.use("/", (req, res, next) => {
+app.use("/", async (req, res, next) => {
   if (!req.session.cart) {
     req.session.cart = [];
   }
-  return next();
-});
-app.use("/", async (req, res, next) => {
+  
   if (req.user) {
     if (!req.session.userCart) {
       const userCart = new Cart(req.user.id);
@@ -143,7 +143,6 @@ app.use("/logout", logoutRouter);
 */
 const testRouter = require("./src/routes/admin/testRoutes");
 app.use("/test", testRouter);
-
 
 /** 
  * 

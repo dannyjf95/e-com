@@ -3,29 +3,27 @@ import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
 import { Link } from "react-router-dom";
 import "./hero.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/login-logout/login/loginSlice";
 export default function Hero() {
+  const loggedIn = useSelector(selectUser);
+  console.log(loggedIn);
   return (
     //here we would covert to nav link
     //loop over categories and Link to each paath  then rendering htat componets data
     // items as example
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="nav">
+        <Link to={"/cart"}>Cart</Link>
+        {loggedIn.user === null && <Link to={"/login"}>Login</Link>}
+        {loggedIn.user && loggedIn.user.user.name}
       </div>
       <div className="nav">
         <Link to={"/"}>Home</Link>
+
         <Link to={"/counter"}>Counter</Link>
 
         <Link to={"/items"}>Items</Link>
-
-        <Link to={"/cart"}>Cart</Link>
-
-        <Link to={"/login"}>Login</Link>
 
         <Link to={"/categories"}>Categories</Link>
       </div>

@@ -6,5 +6,6 @@ export const fetchCategories = thunkCreator({
   apiEndpoint: API_CATEGORIES,
   dataKey: "categories",
   method: "GET",
+  headers: { "Content-Type": "application/json" },
   body: null,
 });

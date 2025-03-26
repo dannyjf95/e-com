@@ -6,5 +6,6 @@ export const fetchCart = thunkCreator({
   apiEndpoint: API_CART,
   dataKey: null,
   method: "GET",
+  headers: { "Content-Type": "application/json" },
   body: null,
 });

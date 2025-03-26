@@ -1,6 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const thunkCreator = ({ actionType, apiEndpoint, dataKey = null, method = "GET", body = null }) => {
+export const thunkCreator = ({
+  actionType = null,
+  apiEndpoint = null,
+  dataKey = null,
+  method = null,
+  headers = null,
+  body = null,
+}) => {
   return createAsyncThunk(actionType, async (_, thunkAPI) => {
     // await new Promise((res) => setTimeout(res, 2000));
     // console.log("📌 Creating thunk for:", actionType, "→", apiEndpoint);
@@ -8,6 +15,7 @@ export const thunkCreator = ({ actionType, apiEndpoint, dataKey = null, method =
     try {
       const response = await fetch(apiEndpoint, {
         method,
+        headers,
         body: body ? JSON.stringify(body) : null,
         credentials: "include",
       });
