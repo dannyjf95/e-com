@@ -39,7 +39,7 @@ describe("POST cart management, guest", () => {
     });
     await agent.delete("/cart");
   });
-
+  
   it("should remove an item from the guest session cart", async () => {
     //SETUP
     await agent.post("/cart/add").send({
