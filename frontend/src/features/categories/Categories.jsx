@@ -11,10 +11,10 @@ export default function Categories() {
     // console.log("Category Component Rendered");
     dispatch(fetchCategories());
   }, []);
-  console.log(categories);
+  // console.log(categories);
   return (
     <div>
-      <p>{categoriesFetchError && categoriesFetchError.error}</p>
+      {categoriesFetchError && <p>{categoriesFetchError.error}</p>}
       {categoriesFetchLoading && <p>loading</p>}
       {categories.rows && <pre>{JSON.stringify(categories.rows, null, 3)}</pre>}
     </div>

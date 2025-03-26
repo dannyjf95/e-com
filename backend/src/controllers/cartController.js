@@ -159,7 +159,7 @@ const deleteCart = async (req, res) => {
 };
 
 const cartView = async (req, res) => {
-  console.log("Session:", req.session);  // Log the session for debugging
+  // console.log("Session:", req.session);  // Log the session for debugging
   try {
     // If logged in
     if (req.user) {

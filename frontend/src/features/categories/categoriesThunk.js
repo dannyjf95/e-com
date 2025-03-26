@@ -4,7 +4,7 @@ const API_CATEGORIES = "http://localhost:5000/categories";
 export const fetchCategories = thunkCreator({
   actionType: "categories/fetchCategories",
   apiEndpoint: API_CATEGORIES,
-  dataKey: 'categories',
+  dataKey: "categories",
   method: "GET",
   body: null,
 });
