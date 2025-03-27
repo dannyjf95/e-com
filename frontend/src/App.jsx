@@ -2,12 +2,16 @@ import { Suspense, useEffect, useLayoutEffect } from "react";
 import "./App.css";
 import { router } from "./router/router";
 import { RouterProvider } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserSession } from "./features/login-logout/sessionCheck/userSessionThunk";
+fetchUserSession;
 function App() {
-  // const state = useSelector((state) => state);
-  
-  //   console.log(state);
-  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserSession());
+    console.log('dsgddsgdsgdg')
+  }, [dispatch]);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

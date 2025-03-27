@@ -1,3 +1,4 @@
+
 import { thunkCreator } from "../../../utils/thunkCreator";
 
 const body = {
@@ -7,8 +8,9 @@ const body = {
 export const fetchUserLogin = thunkCreator({
   actionType: "user/fetchUserLogin",
   apiEndpoint: "http://localhost:5000/account/login",
-  dataKey: null,
+  dataKey: "user",
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: body,
 });
+

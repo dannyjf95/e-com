@@ -18,7 +18,7 @@ export const router = createBrowserRouter(
         </Suspense>
       }
     >
-      {/* <Route index element={<Hero />} /> */}
+      {/* <Route index element={<Nav />} /> */}
 
       <Route path="counter" element={<Counter />} />
       <Route path="items" element={<Items />} />

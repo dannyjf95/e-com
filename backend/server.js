@@ -42,7 +42,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 5000, // 30 minutes
+      maxAge: 1000 * 60 * 60 * 24, // 1 day session
       httpOnly: true,
       secure: false, // Set to true if using HTTPS
       sameSite: "lax", // Allows cookies to be sent across different origins
@@ -60,17 +60,25 @@ app.use(passport.session()); // Add this to manage user session
 /*
  middleware temp
 */
-const checkLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  return res.status(401).send("Unauthorized path, log in to gain access");
-};
+// const checkLoggedIn = (req, res, next) => {
+//   if (req.isAuthenticated()) {
+//     return next();
+//   }
+//   return res.status(401).send("Unauthorized path, log in to gain access");
+// };
 app.use("/", (req, res, next) => {
   req.isAdmin = true;
   next();
 });
 
+app.get("/session", (req, res) => {
+  console.log(req.user);
+  if (req.isAuthenticated()) {
+    res.json({ user: req.user }); // Passport automatically attaches `req.user`
+  } else {
+    res.json({ user: null });
+  }
+});
 // app.use("/", (req, res, next) => {
 //   return next();
 // });
@@ -79,7 +87,7 @@ app.use("/", async (req, res, next) => {
   if (!req.session.cart) {
     req.session.cart = [];
   }
-  
+
   if (req.user) {
     if (!req.session.userCart) {
       const userCart = new Cart(req.user.id);

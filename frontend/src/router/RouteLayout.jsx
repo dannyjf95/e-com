@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Outlet } from "react-router-dom";
-import Hero from "../components/Hero";
+import Nav from "../components/Nav";
 
 export default function RootLayout() {
   return (
     <>
-      <Hero />
+      <Nav />
       <Outlet />
     </>
   );

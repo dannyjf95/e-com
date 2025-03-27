@@ -18,7 +18,7 @@ auth.post("/login", async (req, res, next) => {
           return next(err);
         }
         req.flash("login", "Successfully logged in");
-        return res.json({success:  true,  user:  user})
+        return res.json({ success: true, user: user });
       });
     })(req, res, next);
   } catch (error) {
