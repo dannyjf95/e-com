@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/login-logout/login/loginSlice";
 export default function Nav() {
   const { user, loginLoading, sessionLoading, loggedIn } = useSelector(selectUser);
-  console.log(user);
-  console.log(loggedIn);
+  // console.log(user);
+  // console.log(loggedIn);
   if (sessionLoading) return <p>Loading session...</p>;
 
   return (

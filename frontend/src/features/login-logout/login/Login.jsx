@@ -27,7 +27,7 @@ export default function Login() {
         <input type="submit" />
       </form>
       {!user && "Guest"}
-      {!user === null && <pre>{JSON.stringify(user, null, 3)}</pre>}
+      
     </div>
   );
 }

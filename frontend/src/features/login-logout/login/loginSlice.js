@@ -36,7 +36,6 @@ export const userLoginSlice = createSlice({
       state.sessionError = null;
     });
     builder.addCase(fetchUserSession.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.sessionLoading = false;
       state.sessionError = null;
       state.loggedIn = action.payload.user !== null;

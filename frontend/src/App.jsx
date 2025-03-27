@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUserSession());
-    console.log('dsgddsgdsgdg')
+    
   }, [dispatch]);
 
   return (
