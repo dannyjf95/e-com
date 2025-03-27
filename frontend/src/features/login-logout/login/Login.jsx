@@ -4,13 +4,14 @@ import { fetchUserLogin } from "./loginThunk";
 import { selectUser } from "./loginSlice";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { selectUserSession } from "../sessionCheck/userSessionSlice";
 
 export default function Login() {
-  const { user, userFetchLoading, userFetchError, loggedIn } = useSelector(selectUser);
   const dispatch = useDispatch(selectUser);
-  // console.log("is herer", loggedIn);
   const navigate = useNavigate();
-  //we an use Navigate(-1) after sucessfully logging in
+  const { user, userFetchLoading, userFetchError } = useSelector(selectUser);
+  const { userSession, sessionLoading, sessionError, loggedIn } = useSelector(selectUserSession);
+
   if (loggedIn) {
     return <Navigate to="/" />;
   }
@@ -27,7 +28,6 @@ export default function Login() {
         <input type="submit" />
       </form>
       {!user && "Guest"}
-      
     </div>
   );
 }

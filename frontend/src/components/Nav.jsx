@@ -1,20 +1,30 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/login-logout/login/loginSlice";
+import { selectUserSession } from "../features/login-logout/sessionCheck/userSessionSlice";
+import { fetchUserSession } from "../features/login-logout/sessionCheck/userSessionThunk";
 export default function Nav() {
-  const { user, loginLoading, sessionLoading, loggedIn } = useSelector(selectUser);
-  // console.log(user);
-  // console.log(loggedIn);
-  if (sessionLoading) return <p>Loading session...</p>;
+  const dispatch = useDispatch(selectUser);
+  const { user, loginLoading, loginError } = useSelector(selectUser);
+  const { userSession, sessionLoading, sessionError, loggedIn } = useSelector(selectUserSession);
 
+  useEffect(() => {
+    // Check session when app loads
+    dispatch(fetchUserSession());
+  }, [user]);
+
+  console.log("user", user);
+  if (sessionLoading) return <p>Loading session...</p>;
+  console.log("userSession", userSession);
   return (
     <>
       <div className="nav">
         <Link to={"/cart"}>Cart</Link>
-        {user === null && <Link to={"/login"}>Login</Link>}
-        {user && <span>{user.name}</span>}
+        {/* <Link to={"/login"}>Login</Link> */}
+        {userSession === null && <Link to={"/login"}>Login</Link>}
+        {userSession && <span>{userSession.name}</span>}
       </div>
       <div className="nav">
         <Link to={"/"}>Home</Link>

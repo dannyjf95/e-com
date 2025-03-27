@@ -82,7 +82,7 @@ app.get("/session", (req, res) => {
 // app.use("/", (req, res, next) => {
 //   return next();
 // });
-
+   
 app.use("/", async (req, res, next) => {
   if (!req.session.cart) {
     req.session.cart = [];

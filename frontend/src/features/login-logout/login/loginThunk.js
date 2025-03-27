@@ -1,4 +1,3 @@
-
 import { thunkCreator } from "../../../utils/thunkCreator";
 
 const body = {
@@ -13,4 +12,3 @@ export const fetchUserLogin = thunkCreator({
   headers: { "Content-Type": "application/json" },
   body: body,
 });
-
