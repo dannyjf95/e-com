@@ -15,9 +15,8 @@ export default function Nav() {
     dispatch(fetchUserSession());
   }, [user]);
 
-  console.log("user", user);
   if (sessionLoading) return <p>Loading session...</p>;
-  console.log("userSession", userSession);
+ 
   return (
     <>
       <div className="nav">
