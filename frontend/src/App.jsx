@@ -4,7 +4,7 @@ import { router } from "./router/router";
 import { RouterProvider } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserSession } from "./features/login-logout/sessionCheck/userSessionThunk";
-fetchUserSession;
+
 function App() {
   const dispatch = useDispatch();
 

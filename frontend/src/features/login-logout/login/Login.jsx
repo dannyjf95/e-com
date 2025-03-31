@@ -4,13 +4,12 @@ import { fetchUserLogin } from "./loginThunk";
 import { selectUser } from "./loginSlice";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { selectUserSession } from "../sessionCheck/userSessionSlice";
+// import { selectUserSession } from "../sessionCheck/userSessionSlice";
 
 export default function Login() {
   const dispatch = useDispatch(selectUser);
   const navigate = useNavigate();
-  const { user, userFetchLoading, userFetchError } = useSelector(selectUser);
-  const { userSession, sessionLoading, sessionError, loggedIn } = useSelector(selectUserSession);
+  const { user, userFetchLoading, userFetchError, loggedIn } = useSelector(selectUser);
 
   if (loggedIn) {
     return <Navigate to="/" />;

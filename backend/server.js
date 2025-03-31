@@ -71,6 +71,8 @@ app.use("/", (req, res, next) => {
   next();
 });
 
+
+
 app.get("/session", (req, res) => {
   console.log(req.user);
   if (req.isAuthenticated()) {

@@ -23,6 +23,7 @@ export const cartSlice = createSlice({
       state.cartFetchLoading = false;
       state.cartFetchError = action.payload || "";
     });
+    
   },
 });
 export const selectCart = (state) => state.cart;

@@ -8,7 +8,8 @@ export const userLoginSlice = createSlice({
     user: null,
     loginLoading: false,
     loginError: null,
-    // loggedIn: false,
+    loggedIn: false,
+    sessionLoading: false,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -26,6 +27,23 @@ export const userLoginSlice = createSlice({
     builder.addCase(fetchUserLogin.rejected, (state, action) => {
       state.loginLoading = false;
       state.loginError = action.payload.message || "Login failed";
+    });
+    //fetch user session
+    builder.addCase(fetchUserSession.pending, (state) => {
+      state.sessionLoading = true;
+      state.sessionError = null;
+    });
+    builder.addCase(fetchUserSession.fulfilled, (state, action) => {
+      // console.log(action.payload);
+      state.sessionLoading = false;
+      state.sessionError = null;
+      state.loggedIn = action.payload !== null;
+      state.user = action.payload;
+      // state.loggedIn = true;
+    });
+    builder.addCase(fetchUserSession.rejected, (state, action) => {
+      state.sessionLoading = false;
+      state.sessionError = action.payload || "Session restore failed";
     });
   },
 });

@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "./cartThunk";
 import { selectCart } from "./cartSlice";
 import { selectUser } from "../login-logout/login/loginSlice";
 import "./cart.css";
-import { Link } from "react-router-dom";
+
 export default function Cart() {
   const dispatch = useDispatch();
   const { cart, cartFetchLoading, cartFetchRrror } = useSelector(selectCart);
@@ -12,27 +12,36 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(fetchCart());
-  }, [user]);
+  }, [user, dispatch]);
 
-  const typeOfUser = (cart && ["user cart"]) || (cart && cart["gust cart"]);
-  const userCart = cart[typeOfUser];
+  for (let i in cart) {
+    console.log(cart);
+  }
+
+  let typeOfUser;
+  if (cart["user cart"]) {
+    typeOfUser = cart["user cart"];
+  } else {
+    typeOfUser = cart["guest cart"];
+  }
+  const userCart = typeOfUser;
 
   const items =
-    userCart &&
-    userCart.items.map((item) => {
+    typeOfUser &&
+    typeOfUser.items.map((item) => {
       return {
         name: item.name,
         size: `UK ${item.size}`,
         space: "",
         price: `£${item.price}`,
-        quantity: `QTY ${item.quantity}`,
+        quantity: `QTY ${item.quantity} `,
       };
     });
-
+    
   if (userCart === undefined) {
     return;
   }
-  const cartTotal = userCart.total;
+  const cartTotal = userCart.cartTotal;
   // console.log(typeof userCart.cartTotal, userCart.cartTotal);
   return (
     <div>
@@ -50,15 +59,11 @@ export default function Cart() {
                     {detailValue}
                   </span>
                 ))}
-                {/* <span>{detail.name} </span>
-                <span>{detail.size}</span>
-                <span></span> <span>£{detail.price}</span>
-                <span>qty: {detail.quantity}</span> */}
               </li>
             ))}
           </ul>
         </div>
-        <div className="total">total: {userCart.cartTotal}</div>
+        <div className="total">total: {cartTotal}</div>
       </div>
     </div>
   );
