@@ -2,21 +2,34 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "./categoriesThunk";
 import { selectCategories } from "./categoriesSlice";
+// import SubCategories from "../subCategories/SubCategories";
+import Category from "../category/Category";
+import "./categories.css";
 
 export default function Categories() {
+  const dispatch = useDispatch();
   const { categories, categoriesFetchLoading, categoriesFetchError } = useSelector(selectCategories);
 
-  const dispatch = useDispatch();
   useEffect(() => {
-    // console.log("Category Component Rendered");
     dispatch(fetchCategories());
-  }, []);
-  // console.log(categories);
+  }, [dispatch]);
+
+  if (categories != []) {
+    // console.log(categories);
+  }
+
   return (
-    <div>
-      {categoriesFetchError && <p>{categoriesFetchError.error}</p>}
-      {categoriesFetchLoading && <p>loading</p>}
-      {categories.rows && <pre>{JSON.stringify(categories.rows, null, 3)}</pre>}
+    <div className="cat-container">
+      {categories.rows &&
+        categories.rows.map((category, idx) => {
+          return <Category key={idx} category={category} />;
+        })}
     </div>
   );
 }
+
+/*
+{ {categoriesFetchError && <p>{categoriesFetchError.error}</p>}
+      {categoriesFetchLoading && <p>loading</p>}
+      {categories.rows && <pre>{JSON.stringify(categories.rows, null, 3)}</pre>} }
+*/

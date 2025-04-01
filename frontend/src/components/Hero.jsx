@@ -1,0 +1,30 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "./nav.css";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../features/login-logout/login/loginSlice";
+import Categories from "../features/categories/Categories";
+// import { selectCategories } from "../features/categories/categoriesSlice";
+export default function Nav() {
+  //user
+  const { user, loginLoading, loginError, sessionLoading } = useSelector(selectUser);
+  //categories shop
+  // const categories = useSelector(selectCategories);
+
+  if (sessionLoading) return <p>Loading session...</p>;
+
+  return (
+    <>
+      <div className="nav">
+        <Link to={"/"}>Home/LOGO</Link>
+        <Link to={"/cart"}>Cart</Link>
+
+        {user === null && <Link to={"/login"}>Login</Link>}
+        {user && <span>{user.name}</span>}
+      </div>
+      <div className="nav">
+        <Categories />
+      </div>
+    </>
+  );
+}

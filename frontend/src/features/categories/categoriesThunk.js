@@ -8,4 +8,15 @@ export const fetchCategories = thunkCreator({
   method: "GET",
   headers: { "Content-Type": "application/json" },
   body: null,
+  params: null,
 });
+
+// export const fetchSubCatItems = thunkCreator({
+//   actionType: "categories/fetchSubCategories",
+//   apiEndpoint: API_CATEGORIES,
+//   dataKey: "categories",
+//   method: "GET",
+//   headers: { "Content-Type": "application/json" },
+//   body: null,
+//   params: null,
+// });

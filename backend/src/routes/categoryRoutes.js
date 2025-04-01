@@ -15,6 +15,6 @@ category.get("/", getCategories); //complete
 category.get("/:catname", getCategory); //complete
 category.get("/:catname/:subcatname", getSubCatsAndItems); //complete
 
+// category.get(":subcat/items", getSubCatsAndItems);
 
-module.exports = category; 
- 
+module.exports = category;

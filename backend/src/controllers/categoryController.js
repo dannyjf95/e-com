@@ -25,7 +25,7 @@ async function getCategory(req, res) {
       return res.status(404).json({ message: "categories not found" });
     }
 
-    return res.status(200).json({ items: result });
+    return res.status(200).json({ category: result });
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ error: "Something went wrong" });
@@ -47,8 +47,9 @@ async function getSubCategories(req, res) {
 }
 
 async function getSubCatsAndItems(req, res) {
+  console.log(123)
   try {
-    const result = await categories.getSubCatItems(req.params.subcatname);
+    const result = await categories.getSubCatItems(req.params);
 
     if (!result) {
       return res.status(404).json({ message: "categories not found" });

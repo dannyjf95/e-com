@@ -18,10 +18,8 @@ export const router = createBrowserRouter(
         </Suspense>
       }
     >
-      {/* <Route index element={<Nav />} /> */}
-
       <Route path="counter" element={<Counter />} />
-      <Route path="items" element={<Items />} />
+      <Route path="categories/:catname/:subcatname" element={<Items />} />
       <Route path="cart" element={<Cart />} />
       <Route path="login" element={<Login />} />
       <Route path="categories" element={<Categories />} />

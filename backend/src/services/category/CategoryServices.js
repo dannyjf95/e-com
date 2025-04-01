@@ -4,6 +4,9 @@ const models = require("../../../models");
 class Category {
   async getCategories() {
     return await models.Categories.findAndCountAll({
+      include: {
+        model: models.Sub_categories,
+      },
       order: [["id", "asc"]],
     });
   }
@@ -35,11 +38,11 @@ class Category {
     return result;
   }
 
-  async getSubCatItems(subname) {
-    // console.log(subname);
+  async getSubCatItems(reqParams) {
+    console.log(reqParams);
     const result = await models.Sub_categories.findAll({
       include: [models.Items],
-      where: { name: subname },
+      where: { name: reqParams.subcatname },
     });
     return result;
   }

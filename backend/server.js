@@ -66,12 +66,6 @@ app.use(passport.session()); // Add this to manage user session
 //   }
 //   return res.status(401).send("Unauthorized path, log in to gain access");
 // };
-app.use("/", (req, res, next) => {
-  req.isAdmin = true;
-  next();
-});
-
-
 
 app.get("/session", (req, res) => {
   console.log(req.user);
@@ -81,11 +75,10 @@ app.get("/session", (req, res) => {
     res.json({ user: null });
   }
 });
-// app.use("/", (req, res, next) => {
-//   return next();
-// });
-   
+
 app.use("/", async (req, res, next) => {
+  req.isAdmin = true;
+
   if (!req.session.cart) {
     req.session.cart = [];
   }

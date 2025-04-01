@@ -28,3 +28,7 @@ src/
      |- index.js                    # React Router configuration
   |- .env                           # Environment variables
   |- index.js                       # Application entry file
+
+
+
+  //with the link to executing a url we would then pass that in teh router to that component
