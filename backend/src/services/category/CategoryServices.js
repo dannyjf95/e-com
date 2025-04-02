@@ -39,7 +39,7 @@ class Category {
   }
 
   async getSubCatItems(reqParams) {
-    console.log(reqParams);
+    // console.log(reqParams);
     const result = await models.Sub_categories.findAll({
       include: [models.Items],
       where: { name: reqParams.subcatname },

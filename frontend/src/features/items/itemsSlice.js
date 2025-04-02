@@ -15,6 +15,7 @@ export const itemsSlice = createSlice({
       state.itemFetchError = null;
     });
     builder.addCase(fetchItems.fulfilled, (state, action) => {
+      // console.log(action.payload);
       state.itemFetchLoading = false;
       state.itemFetchError = null;
       state.items = action.payload;

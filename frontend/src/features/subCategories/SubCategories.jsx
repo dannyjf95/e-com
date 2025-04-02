@@ -8,8 +8,12 @@ export default function SubCategories({ data }) {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {data &&
-        data.subCats.map((sub) => {
-          return <Link to={`categories/${catname}/${sub.name}`}>{sub.name}</Link>;
+        data.subCats.map((sub, idx) => {
+          return (
+            <Link key={idx} to={`categories/${catname}/${sub.name}`}>
+              {sub.name}
+            </Link>
+          );
         })}
     </div>
   );

@@ -9,12 +9,11 @@ export const thunkCreator = ({
   body = null,
   params = null,
 }) => {
-  return createAsyncThunk(actionType, async (paramNames = params, thunkAPI) => {
-    // await new Promise((res) => setTimeout(res, 2000));
-    // console.log("📌 Creating thunk for:", actionType, "→", apiEndpoint);
-    // console.log("🚀 Dispatching thunk:", actionType, "→", apiEndpoint);
-    console.log(paramNames);
+  return createAsyncThunk(actionType, async (params, thunkAPI) => {
+    console.log(params);
+    // {catename: 'footware', subcatname: 'running shoes'}
     try {
+      const path = params ? Object.values(params).join("/") : "";
       const options = {
         method,
         headers,
@@ -22,11 +21,8 @@ export const thunkCreator = ({
         credentials: "include",
       };
 
-      let response;
-      params
-        ? (response = await fetch(`${apiEndpoint}/${params}`, options))
-        : (response = await fetch(`${apiEndpoint}`, options));
-     
+      const response = params ? await fetch(`${apiEndpoint}/${path}`, options) : await fetch(`${apiEndpoint}`, options);
+
       if (!response.ok) {
         const errorInfo = await response.json();
         console.error("❌ Fetch failed:", apiEndpoint, errorInfo);
@@ -43,3 +39,6 @@ export const thunkCreator = ({
     }
   });
 };
+// await new Promise((res) => setTimeout(res, 2000));
+// console.log("📌 Creating thunk for:", actionType, "→", apiEndpoint);
+// console.log("🚀 Dispatching thunk:", actionType, "→", apiEndpoint);

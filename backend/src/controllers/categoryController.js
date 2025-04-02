@@ -47,7 +47,7 @@ async function getSubCategories(req, res) {
 }
 
 async function getSubCatsAndItems(req, res) {
-  console.log(123)
+  // console.log(123)
   try {
     const result = await categories.getSubCatItems(req.params);
 
