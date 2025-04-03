@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function SubCategories({ data }) {
-  console.log(data.catname);
+  // console.log(data.catname);
   const { catname } = data;
   // <Link to={`categories/`}>{name}</Link>
   return (

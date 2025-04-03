@@ -17,7 +17,7 @@ export default function Login() {
   //turn into handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchUserLogin());
+    dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
     navigate(-1);
   };
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const thunkCreator = ({
+export const postThunkCreator = ({
   actionType = null,
   apiEndpoint = null,
   dataKey = null,
@@ -9,9 +9,8 @@ export const thunkCreator = ({
   body = null,
   params = null,
 }) => {
-  return createAsyncThunk(actionType, async (params, thunkAPI) => {
-    // console.log(params);
-    // {catename: 'footware', subcatname: 'running shoes'}
+  return createAsyncThunk(actionType, async (body, thunkAPI) => {
+    console.log(body);
     try {
       const path = params ? Object.values(params).join("/") : "";
       const options = {

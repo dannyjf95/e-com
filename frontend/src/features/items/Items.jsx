@@ -18,7 +18,7 @@ export default function Items() {
     dispatch(fetchItems(params)); // Now passing params properly
   }, [dispatch, catname, subcatname]);
   if (items.length !== 0) {
-    console.log(items);
+    // console.log(items);
   }
   return (
     <div style={{ display: "flex", gap: "1rem" }}>

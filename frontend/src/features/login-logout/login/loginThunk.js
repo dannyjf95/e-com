@@ -1,10 +1,10 @@
-import { thunkCreator } from "../../../utils/thunkCreator";
+import { postThunkCreator } from "../../../utils/postThunkCreator";
 
 const body = {
   username: "dan",
   password: "dan",
 };
-export const fetchUserLogin = thunkCreator({
+export const fetchUserLogin = postThunkCreator({
   actionType: "user/fetchUserLogin",
   apiEndpoint: "http://localhost:5000/account/login",
   dataKey: "user",
