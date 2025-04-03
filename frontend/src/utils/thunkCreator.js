@@ -10,7 +10,7 @@ export const thunkCreator = ({
   params = null,
 }) => {
   return createAsyncThunk(actionType, async (params, thunkAPI) => {
-    console.log(params);
+    // console.log(params);
     // {catename: 'footware', subcatname: 'running shoes'}
     try {
       const path = params ? Object.values(params).join("/") : "";

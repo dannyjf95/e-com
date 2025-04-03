@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./nav.css";
+import "./hero.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/login-logout/login/loginSlice";
 import Categories from "../features/categories/Categories";
 // import { selectCategories } from "../features/categories/categoriesSlice";
-export default function Nav() {
+export default function Hero() {
   //user
   const { user, loginLoading, loginError, sessionLoading } = useSelector(selectUser);
   //categories shop

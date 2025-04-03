@@ -8,6 +8,8 @@ import { fetchUserSession } from "./features/login-logout/sessionCheck/userSessi
 function App() {
   const dispatch = useDispatch();
 
+  // useEffect(() => {}, []);
+
   useEffect(() => {
     dispatch(fetchUserSession());
     // console.log("dispatched");
