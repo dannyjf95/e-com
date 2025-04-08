@@ -15,10 +15,10 @@ const getCart = async (req, res) => {
     })
   );
 };
-
+      
 const addToCart = async (req, res) => {
   const reqItem = req.body.item;
-
+ console.log(reqItem)
   try {
     // Check if the user is logged in
     if (req.user) {
@@ -28,8 +28,10 @@ const addToCart = async (req, res) => {
 
         const existingItem = await userCart.getCartItem(reqItem);
         if (!existingItem) {
+          console.log('yes')
           await userCart.createItem(reqItem, transaction);
         } else {
+          console.log('no')
           await userCart.updateItem(reqItem, existingItem.dataValues, transaction);
         }
 

@@ -26,7 +26,10 @@ export default function Items() {
       {itemFetchLoading && <p>loading</p>}
       {items.length > 0 && <pre>{JSON.stringify(items, null, 3)}</pre>} */}
 
-      {items[0] && items[0].Items.map((item, idx) => <Card key={idx} item={item} />)}
+      {items[0] &&
+        items[0].Items.map((item, idx) => {
+          return <Card key={idx} item={item} />;
+        })}
     </div>
   );
 }

@@ -32,3 +32,5 @@ src/
 
 
   //with the link to executing a url we would then pass that in teh router to that component
+
+  //continue with item adding 

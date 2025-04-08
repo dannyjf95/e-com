@@ -100,6 +100,7 @@ class Cart {
   }
 
   async updateItem(reqItem, existingItem, transaction) {
+    console.log('here',  reqItem.quantity)
     await models.Cart_items.update(
       { item_quantity: reqItem.quantity, size: reqItem.size },
       {
@@ -113,7 +114,7 @@ class Cart {
       transaction
     );
   }
-
+    
   //post(create)
   async createItem(reqItem, transaction) {
     return await models.Cart_items.create(
