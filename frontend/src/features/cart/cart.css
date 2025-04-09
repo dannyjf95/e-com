@@ -1,19 +1,19 @@
 .cart-box {
   background-color: grey;
+  color: black;
   height: 400px;
   width: 400px;
   text-align: start;
   padding: 10px;
   display: grid;
   grid-template-columns: 400px;
-  grid-template-rows: 80% 20%;
+  grid-template-rows: 85% 15%;
 }
 .items {
   padding: 1rem;
-  background-color: green;
+  background-color: rgb(255, 255, 255);
 }
 .item-details {
-  color: pink;
   font-size: 0.8rem;
   text-decoration: none;
   list-style: none;
@@ -21,20 +21,30 @@
 }
 .item-row {
   display: grid;
-  grid-template-columns: 1.7fr 0.6fr 0.8fr 0.8fr 1fr;
+  grid-template-columns: 2.2fr 0.6fr 0.3fr 0.8fr 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas: ". . . . .";
+  /* justify-items: center; */
+  align-items: center;
+ 
+}
+.item-size:nth-child(2) {
+  /* display: flex;
+  font-size: 0.6rem;
+  justify-content: flex-start;
+  align-items: flex-end; */
+}
+
+.item-detail {
+  display: flex;
 }
 .item-size:nth-child(2) {
   display: flex;
-  font-size: 0.6rem;
-  justify-content: flex-start;
-  align-items: flex-end;
-}
+  background-color: rgba(128, 128, 128, 0.236);
+  width: fit-content;
 
-.item-size   {
-    display: flex;
+  /* height:50% */
 }
 .size {
   font-family: 3rem;
@@ -44,7 +54,8 @@ ul span {
   padding: 0.2rem;
 }
 .total {
+  color: black;
   text-align: right;
-  background-color: blue;
+  background-color: rgb(255, 255, 255);
   padding: 1rem;
 }

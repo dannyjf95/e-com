@@ -5,7 +5,7 @@ import { addToCart } from "../../features/cart/cartThunk";
 
 export default function Card({ item }) {
   // console.log(item);
-  const [itemForm, setItemForm] = useState({ id: item.id, size: null, quantity: 1 });
+  const [itemForm, setItemForm] = useState({ id: item.id, size: '', quantity: 1 });
   console.log(itemForm);
   const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ export default function Card({ item }) {
   const handleAddToCart = (e) => {
     e.preventDefault();
 
-    if (itemForm.size === null) {
+    if (itemForm.size === null || itemForm.size === "") {
       console.log("add values");
       return;
     }
@@ -44,8 +44,10 @@ export default function Card({ item }) {
 
         <form onSubmit={handleAddToCart}>
           <input type="hidden" value={item.id} name="itemId" />
-          <select name="size" value="" onChange={handleItemChange}>
-            <option value="size">Size</option>
+          <select name="size" value={itemForm.size} onChange={handleItemChange}>
+            <option selected disabled value="">
+              Size
+            </option>
             <option value="s">s</option>
             <option value="m">m</option>
             <option value="l">l</option>

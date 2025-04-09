@@ -22,8 +22,9 @@ export default function Items() {
   }
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      {/* <p>{itemFetchError && itemFetchError.error}</p>
+      <p>{itemFetchError && itemFetchError.error}</p>
       {itemFetchLoading && <p>loading</p>}
+      {/* 
       {items.length > 0 && <pre>{JSON.stringify(items, null, 3)}</pre>} */}
 
       {items[0] &&

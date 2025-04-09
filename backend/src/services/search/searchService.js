@@ -16,7 +16,7 @@ class Search {
         (await this.subCategoryResultls()) ?? "No sub categories found",
     };
   }
-
+  
   async itemResults() {
     return models.Items.findAll({
       where: {
@@ -30,7 +30,7 @@ class Search {
       raw: true,
     });
   }
-
+ 
   async categoryResults() {
     return await models.Categories.findAll({
       where: {

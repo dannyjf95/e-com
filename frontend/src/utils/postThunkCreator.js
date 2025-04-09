@@ -1,21 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const postThunkCreator = ({
-  actionType = null,
-  apiEndpoint = null,
-  dataKey = null,
-  method = null,
-  headers = null,
-  body = null,
-  params = null,
-}) => {
+export const postThunkCreator = ({ actionType = null, apiEndpoint = null, dataKey = null, params = null }) => {
   return createAsyncThunk(actionType, async (body, thunkAPI) => {
     console.log(body);
     try {
       const path = params ? Object.values(params).join("/") : "";
       const options = {
-        method,
-        headers,
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: body ? JSON.stringify(body) : null,
         credentials: "include",
       };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart } from "./cartThunk";
+import { fetchCart, deleteFromCart } from "./cartThunk";
 import { selectCart } from "./cartSlice";
 import { selectUser } from "../login-logout/login/loginSlice";
 import "./cart.css";
@@ -15,7 +15,7 @@ export default function Cart() {
   }, [user, dispatch]);
 
   for (let i in cart) {
-    console.log(cart);
+    // console.log(cart);
   }
 
   let typeOfUser;
@@ -31,40 +31,47 @@ export default function Cart() {
     typeOfUser.items.map((item) => {
       return {
         name: item.name,
-        size: `UK ${item.size}`,
+        size: item.size.toUpperCase(),
         space: "",
         price: `£${item.price}`,
         quantity: `QTY ${item.quantity} `,
+        button: <button onClick={() => dispatch(deleteFromCart({id: item.id}))}>Remove</button>,
       };
     });
-    
+
   if (userCart === undefined) {
     return;
   }
-  const cartTotal = userCart.cartTotal;
+  // const cartTotal = userCart.cartTotal;
   // console.log(typeof userCart.cartTotal, userCart.cartTotal);
   return (
     <div>
-      {!cart["guest cart"] && !cart["user cart"] ? "Loading..." : null}
-      {cart["guest cart"] && <pre>{JSON.stringify(cart["guest cart"], null, 3)}</pre>}
-      {cart["user cart"] && <pre>{JSON.stringify(cart["user cart"], null, 3)}</pre>}
       <div className="cart-box">
         <div className="items">
           Cart
           <ul className="item-details">
-            {items.map((detail, idx) => (
-              <li className="item-row" key={idx}>
-                {Object.values(detail).map((detailValue, idx) => (
-                  <span className="item-size" key={idx}>
-                    {detailValue}
-                  </span>
-                ))}
-              </li>
-            ))}
+            {items &&
+              items.map((detail, idx) => (
+                <li className="item-row" key={idx}>
+                  {Object.values(detail).map((detailValue, idx) => (
+                    <span className="item-detail" key={idx}>
+                      {detailValue}
+                    </span>
+                  ))}
+                </li>
+              ))}
           </ul>
         </div>
-        <div className="total">total: {cartTotal}</div>
+        <div className="total">total: {userCart.cartTotal}</div>
       </div>
+      {/* {!cart["guest cart"] && !cart["user cart"] ? "Loading..." : null}
+      {cart["guest cart"] && <pre>{JSON.stringify(cart["guest cart"], null, 3)}</pre>}
+      {cart["user cart"] && <pre>{JSON.stringify(cart["user cart"], null, 3)}</pre>} */}
     </div>
   );
 }
+
+/**
+   
+  
+  */

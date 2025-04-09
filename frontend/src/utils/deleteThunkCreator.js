@@ -1,28 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getThunkCreator = ({
-  actionType = null,
-  apiEndpoint = null,
-  dataKey = null,
-  // method = 'GET',
-  headers = null,
-  body = null,
-  // params = null,
-}) => {
+export const deleteThunkCreator = ({ actionType = null, apiEndpoint = null, dataKey = null, params = null }) => {
   return createAsyncThunk(actionType, async (params, thunkAPI) => {
-    // console.log(params);
-    // {catename: 'footware', subcatname: 'running shoes'}
+    // await new Promise((res) => setTimeout(res, 2000));
+    // console.log("📌 Creating thunk for:", actionType, "→", apiEndpoint);
+    // console.log("🚀 Dispatching thunk:", actionType, "→", apiEndpoint);
+    console.log(apiEndpoint);
     try {
-      const path = params ? Object.values(params).join("/") : "";
       const options = {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        body: body ? JSON.stringify(body) : null,
+        method: "DELETE",
+        // headers: { "Content-Type": "application/json" },
+        // body: body ? JSON.stringify(body) : null,
         credentials: "include",
       };
-
-      const response = params ? await fetch(`${apiEndpoint}/${path}`, options) : await fetch(`${apiEndpoint}`, options);
-
+      const response = await fetch(`${apiEndpoint}${params.id}`, options);
+      // const response = params ? await fetch(`${apiEndpoint}/${path}`, options) : await fetch(`${apiEndpoint}`, options);
+      console.log(response);
       if (!response.ok) {
         const errorInfo = await response.json();
         console.error("❌ Fetch failed:", apiEndpoint, errorInfo);
