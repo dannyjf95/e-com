@@ -1,0 +1,15 @@
+.item-section {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.items-container {
+    display: flex;
+    gap: 1rem;
+}
+.bread-crumb {
+    text-align: start;
+    color: rgba(255, 255, 255, 0.416);
+    font-size: .8rem;
+}
