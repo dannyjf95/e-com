@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+  
 export const deleteThunkCreator = ({ actionType = null, apiEndpoint = null, dataKey = null, params = null }) => {
   return createAsyncThunk(actionType, async (params, thunkAPI) => {
     console.log(apiEndpoint);
