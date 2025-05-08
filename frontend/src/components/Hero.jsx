@@ -4,6 +4,7 @@ import "./hero.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/login-logout/login/loginSlice";
 import Categories from "../features/categories/Categories";
+import Login from "../features/login-logout/login/Login";
 // import { selectCategories } from "../features/categories/categoriesSlice";
 export default function Hero() {
   //user

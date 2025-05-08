@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserLogin } from "./loginThunk";
 import { selectUser } from "./loginSlice";
-import { Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Navigate,  useNavigate } from "react-router-dom";
 // import { selectUserSession } from "../sessionCheck/userSessionSlice";
 
 export default function Login() {
@@ -18,7 +17,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
-    navigate('/');
+    navigate(-1);
   };
 
   return (

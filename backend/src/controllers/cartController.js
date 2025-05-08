@@ -62,7 +62,7 @@ const addToCart = async (req, res) => {
         updated = true;
       }
     }
-
+     
     if (!updated) {
       req.session.cart.push(reqItem);
     }
