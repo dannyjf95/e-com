@@ -10,7 +10,7 @@ export default function Items() {
   const { items, itemFetchLoading, itemFetchError } = useSelector(selectItems);
   const dispatch = useDispatch();
   const { catname, subcatname } = useParams();
-  console.log(catname, subcatname);
+  // console.log(catname, subcatname);
   useEffect(() => {
     const params = {};
     if (catname) params.catname = catname;

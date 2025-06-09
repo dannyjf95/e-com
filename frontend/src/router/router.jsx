@@ -2,24 +2,16 @@ import React, { Suspense } from "react";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 //components
 const RootLayout = React.lazy(() => import("./RouteLayout"));
-const Counter = React.lazy(() => import("../features/counter/Counter"));
+
 const Items = React.lazy(() => import("../features/items/Items"));
 const Cart = React.lazy(() => import("../features/cart/Cart"));
 const Login = React.lazy(() => import("../features/login-logout/login/Login"));
 const Categories = React.lazy(() => import("../features/categories/Categories"));
 
-export const router = createBrowserRouter(
+const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* Login Page Route outside RootLayout */}
-      <Route
-        path="/login"
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Login />
-          </Suspense>
-        }
-      />
 
       {/* Main App Layout */}
       <Route
@@ -34,7 +26,17 @@ export const router = createBrowserRouter(
         <Route path="cart" element={<Cart />} />
         <Route path="categories" element={<Categories />} />
       </Route>
+
+      <Route
+        path="/login"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <Login />
+          </Suspense>
+        }
+      />
     </>
   )
 );
 
+export default router;

@@ -2,13 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserLogin } from "./loginThunk";
 import { selectUser } from "./loginSlice";
-import { Navigate,  useNavigate } from "react-router-dom";
-// import { selectUserSession } from "../sessionCheck/userSessionSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch(selectUser);
   const navigate = useNavigate();
-  const { user, userFetchLoading, userFetchError, loggedIn } = useSelector(selectUser);
+  const { user, userFetchLoading, userFetchError, loggedIn,  a } = useSelector(selectUser);
 
   if (loggedIn) {
     return <Navigate to="/" />;
@@ -16,8 +15,8 @@ export default function Login() {
   //turn into handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
-    navigate(-1);
+    dispatch(fetchUserLogin({ username: "dan", password: "dan" }));    
+    navigate('/'); // Redirect to home after login
   };
 
   return (

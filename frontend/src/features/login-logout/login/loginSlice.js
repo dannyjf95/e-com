@@ -13,12 +13,13 @@ export const userLoginSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    // 🔵 Login Actions
+    // Login Actions
     builder.addCase(fetchUserLogin.pending, (state) => {
       state.loginLoading = true;
       state.loginError = null;
     });
     builder.addCase(fetchUserLogin.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.loginLoading = false;
       state.loginError = null;
       state.user = action.payload;
@@ -51,5 +52,5 @@ export const userLoginSlice = createSlice({
 export const selectUser = (state) => state.user;
 
 export const {} = userLoginSlice.actions;
-
+console.log(userLoginSlice)
 export default userLoginSlice.reducer;

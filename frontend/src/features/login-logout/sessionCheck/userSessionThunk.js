@@ -4,6 +4,6 @@ export const fetchUserSession = createAsyncThunk("session/fetchUserSession", asy
     credentials: "include", // Important! Sends session cookie
   });
   const data = await response.json();
-  // console.log(data)
+  console.log(data)
   return data.user;
 });

@@ -3,10 +3,12 @@ import "./card.css";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cart/cartThunk";
 
+
+/**  ADD WARNING MESSAGE FOR USER IN CARD  BOX FOR UNSELECTED VALUE WHEN SUBMITTING */
 export default function Card({ item }) {
   // console.log(item);
-  const [itemForm, setItemForm] = useState({ id: item.id, size: '', quantity: 1 });
-  console.log(itemForm);
+  const [itemForm, setItemForm] = useState({ id: item.id, size: "", quantity: 1 });
+  // console.log(itemForm);
   const dispatch = useDispatch();
 
   const handleItemChange = (e) => {
@@ -44,10 +46,8 @@ export default function Card({ item }) {
 
         <form onSubmit={handleAddToCart}>
           <input type="hidden" value={item.id} name="itemId" />
-          <select name="size" value={itemForm.size} onChange={handleItemChange}>
-            <option selected disabled value="">
-              Size
-            </option>
+          <select name="size" value={itemForm.size} onChange={handleItemChange} required>
+            <option value="">Size</option>
             <option value="s">s</option>
             <option value="m">m</option>
             <option value="l">l</option>

@@ -10,10 +10,10 @@ const path = require("path");
 const cors = require("cors");
 
 //process / node depreciation warnings
-
-process.on("warning", (warning) => {
-  console.log("warning", warning.stack);
-});
+ 
+// process.on("warning", (warning) => {
+//   console.log("warning", warning.stack);
+// });
 // const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session"); //session
 const flash = require("connect-flash");
@@ -22,6 +22,7 @@ const flash = require("connect-flash");
 const Cart = require("./src/services/cart/CartServices");
 const GuestCart = require("./src/services/cart/GuestCartServices");
 
+app.set("trust proxy", 1);
 //middleware
 app.use(
   cors({
@@ -32,7 +33,7 @@ app.use(
 app.use(morgan("dev")); //logging
 app.use(express.json()); //json-parsing
 app.use(express.urlencoded({ extended: true })); //json-parsing
-
+   
 /**
  SESSION MIDDLEWARE
 */
@@ -42,14 +43,14 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 1 day session
+      maxAge: 1000000, // 1 day session
       httpOnly: true,
       secure: false, // Set to true if using HTTPS
       sameSite: "lax", // Allows cookies to be sent across different origins
     },
   })
-);
-
+);   
+     
 app.use(flash());
 /**
  * PASSPORT MIDDLEWARE
@@ -66,7 +67,7 @@ app.use(passport.session()); // Add this to manage user session
 //   }
 //   return res.status(401).send("Unauthorized path, log in to gain access");
 // };
-
+  
 app.get("/session", (req, res) => {
   console.log(req.user);
   if (req.isAuthenticated()) {
@@ -75,15 +76,17 @@ app.get("/session", (req, res) => {
     res.json({ user: null });
   }
 });
-
-app.use("/", async (req, res, next) => {
-  req.isAdmin = true;
+    
+app.use("/", async (req, res, next) => {  
+  
+  // req.isAdmin = true;
 
   if (!req.session.cart) {
     req.session.cart = [];
   }
-
+ 
   if (req.user) {
+    // console.log('yes')  
     if (!req.session.userCart) {
       const userCart = new Cart(req.user.id);
       req.session.userCart = await userCart.getCart(); // Cache the user's cart in the session
