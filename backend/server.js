@@ -10,10 +10,10 @@ const path = require("path");
 const cors = require("cors");
 
 //process / node depreciation warnings
- 
-// process.on("warning", (warning) => {
-//   console.log("warning", warning.stack);
-// });
+
+process.on("warning", (warning) => {
+  console.log("warning", warning.stack);
+});
 // const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session"); //session
 const flash = require("connect-flash");
@@ -33,24 +33,24 @@ app.use(
 app.use(morgan("dev")); //logging
 app.use(express.json()); //json-parsing
 app.use(express.urlencoded({ extended: true })); //json-parsing
-   
+
 /**
  SESSION MIDDLEWARE
-*/  
+*/
 app.use(
   session({
     secret: "secretstring",
-    resave: false,   
-    saveUninitialized: false,   
+    resave: false,
+    saveUninitialized: false,
     cookie: {
-      maxAge: 1000000, // 1 day session   
+      maxAge: 1000000, // 1 day session
       httpOnly: true,
-      secure: false, // Set to true if using HTTPS    
+      secure: false, // Set to true if using HTTPS
       sameSite: "lax", // Allows cookies to be sent across different origins
     },
   })
-);   
-     
+);
+
 app.use(flash());
 /**
  * PASSPORT MIDDLEWARE
@@ -67,26 +67,25 @@ app.use(passport.session()); // Add this to manage user session
 //   }
 //   return res.status(401).send("Unauthorized path, log in to gain access");
 // };
-  
+
 app.get("/session", (req, res) => {
-  console.log(req.user);
+  // if (req.user) console.log(req.user);
   if (req.isAuthenticated()) {
     res.json({ user: req.user }); // Passport automatically attaches `req.user`
   } else {
     res.json({ user: null });
   }
 });
-    
-app.use("/", async (req, res, next) => {  
-  
+
+app.use("/", async (req, res, next) => {
   // req.isAdmin = true;
 
   if (!req.session.cart) {
     req.session.cart = [];
   }
- 
+
   if (req.user) {
-    // console.log('yes')  
+    // console.log('yes')
     if (!req.session.userCart) {
       const userCart = new Cart(req.user.id);
       req.session.userCart = await userCart.getCart(); // Cache the user's cart in the session

@@ -25,17 +25,18 @@ export default function Cart() {
     typeOfUser = cart["guest cart"];
   }
   const userCart = typeOfUser;
-
+console.log(userCart)
   const items =
     typeOfUser &&
     typeOfUser.items.map((item) => {
+      console.log(item)
       return {
         name: item.name,
         size: item.size.toUpperCase(),
         space: "",
-        price: `£${item.price}`,
+        price: `£${item.price}`,  
         quantity: `QTY ${item.quantity} `,
-        button: <button onClick={() => dispatch(deleteFromCart({id: item.id}))}>Remove</button>,
+        button: <button onClick={() => dispatch(deleteFromCart({cartItemId: item.cartItemId}))}>Remove</button>,
       };
     });
 

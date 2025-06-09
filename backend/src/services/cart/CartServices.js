@@ -45,6 +45,7 @@ class Cart {
       userId: result.user_id,
       cartTotal: result.total_price,
       items: (result.Cart_items || []).map((item) => ({
+        cartItemId: item.id,
         id: item.item_id,
         quantity: item.item_quantity,
         name: item.Item.name,
@@ -100,7 +101,7 @@ class Cart {
   }
 
   async updateItem(reqItem, existingItem, transaction) {
-    console.log('here',  reqItem.quantity)
+    console.log("here", reqItem.quantity);
     await models.Cart_items.update(
       { item_quantity: reqItem.quantity, size: reqItem.size },
       {
@@ -113,10 +114,11 @@ class Cart {
       },
       transaction
     );
-  }
-    
+  } 
+
   //post(create)
   async createItem(reqItem, transaction) {
+    console.log(reqItem);
     return await models.Cart_items.create(
       {
         cart_id: this.cart.id,
@@ -129,17 +131,19 @@ class Cart {
   }
 
   //delete
-  async deleteItem(itemId) {
-    console.log(itemId);
+  async deleteItem(cartItemId) {     
+    
+    console.log(cartItemId);
     const item = await models.Cart_items.findOne({
-      where: { id: 3 },
+      where: { id: cartItemId },
     });
-    console.log(item);
+    // console.log(item);
     return await models.Cart_items.destroy({
-      where: { cart_id: this.cart.id, item_id: itemId }, //cahnged form id to item_id(im dumm dumm)
+      where: { cart_id: this.cart.id, id: cartItemId }, //cahnged form id to item_id(im dumm dumm)
       force: true,
     });
   }
 }
 
 module.exports = Cart;
+ 

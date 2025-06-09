@@ -10,7 +10,7 @@ export const deleteThunkCreator = ({ actionType = null, apiEndpoint = null, data
         // body: body ? JSON.stringify(body) : null,
         credentials: "include",
       };
-      const response = await fetch(`${apiEndpoint}${params.id}`, options);
+      const response = await fetch(`${apiEndpoint}${params.cartItemId}`, options);
       // const response = params ? await fetch(`${apiEndpoint}/${path}`, options) : await fetch(`${apiEndpoint}`, options);
       console.log(response);
       if (!response.ok) {

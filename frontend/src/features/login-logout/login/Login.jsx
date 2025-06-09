@@ -15,7 +15,7 @@ export default function Login() {
   //turn into handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
+    // dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
   };
 
   return (
@@ -23,7 +23,7 @@ export default function Login() {
       <form onSubmit={handleSubmit}>
         <input type="submit" />
       </form>
-      {!user && "Guest"}
+      {"Guest"}
     </div>
   );
 }
