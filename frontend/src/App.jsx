@@ -7,11 +7,11 @@ import { fetchUserSession } from "./features/login-logout/sessionCheck/userSessi
 import { selectUserSession } from "./features/login-logout/sessionCheck/userSessionSlice";
 function App() {
   const dispatch = useDispatch();
-  const { sessionLoading } = useSelector((state) => state.user);
-
   useEffect(() => {
     dispatch(fetchUserSession());
   }, [dispatch]);
+  
+  const { sessionLoading } = useSelector((state) => state.user);
 
   if (sessionLoading) return <div>Loading session...</div>;
 
@@ -20,6 +20,5 @@ function App() {
       <RouterProvider router={router} />
     </Suspense>
   );
-
 }
 export default App;

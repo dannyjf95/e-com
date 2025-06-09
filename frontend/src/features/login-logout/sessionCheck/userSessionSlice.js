@@ -26,7 +26,8 @@ export const userSessionSlice = createSlice({
     });
     builder.addCase(fetchUserSession.rejected, (state, action) => {
       state.sessionLoading = false;
-      state.sessionError = action.payload.message || "Session restore failed";
+      state.sessionError = "Session restore failed";
+      // state.sessionError = action.payload.message || "Session restore failed";
     });
   },
 });

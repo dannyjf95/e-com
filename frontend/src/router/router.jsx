@@ -11,13 +11,21 @@ const Categories = React.lazy(() => import("../features/categories/Categories"))
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      {/* Login Page Route outside RootLayout */}
+      {/* Public route: Login */}
+      <Route
+        path="/login"
+        element={
+          <Suspense fallback={<div>Loading login...</div>}>
+            <Login />
+          </Suspense>
+        }
+      />
 
-      {/* Main App Layout */}
+      {/* Protected / main app routes */}
       <Route
         path="/"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div>Loading app...</div>}>
             <RootLayout />
           </Suspense>
         }
@@ -25,18 +33,11 @@ const router = createBrowserRouter(
         <Route path="categories/:catname/:subcatname" element={<Items />} />
         <Route path="cart" element={<Cart />} />
         <Route path="categories" element={<Categories />} />
+        {/* other nested routes */}
       </Route>
-
-      <Route
-        path="/login"
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Login />
-          </Suspense>
-        }
-      />
     </>
   )
 );
+
 
 export default router;

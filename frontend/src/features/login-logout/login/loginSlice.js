@@ -23,7 +23,7 @@ export const userLoginSlice = createSlice({
       state.loginLoading = false;
       state.loginError = null;
       state.user = action.payload;
-      // state.loggedIn = true;
+      state.loggedIn = true;
     });
     builder.addCase(fetchUserLogin.rejected, (state, action) => {
       state.loginLoading = false;
@@ -52,5 +52,5 @@ export const userLoginSlice = createSlice({
 export const selectUser = (state) => state.user;
 
 export const {} = userLoginSlice.actions;
-console.log(userLoginSlice)
+
 export default userLoginSlice.reducer;
