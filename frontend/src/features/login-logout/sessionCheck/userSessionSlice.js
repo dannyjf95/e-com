@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchUserSession } from "../sessionCheck/userSessionThunk";
 
 export const userSessionSlice = createSlice({
-  name: "session",
+  name: "userSession",
   initialState: {
     userSession: null,
     sessionLoading: false,
@@ -18,7 +18,7 @@ export const userSessionSlice = createSlice({
       state.sessionError = null;
     });
     builder.addCase(fetchUserSession.fulfilled, (state, action) => {
-      // console.log('HERE', action.payload);
+      console.log("HERE", action.payload);
       state.sessionLoading = false;
       state.sessionError = null;
       state.loggedIn = action.payload !== null;
@@ -32,7 +32,7 @@ export const userSessionSlice = createSlice({
   },
 });
 
-export const selectUserSession = (state) => state.session;
+export const selectUserSession = (state) => state.userSession;
 
 export const {} = userSessionSlice.actions;
 

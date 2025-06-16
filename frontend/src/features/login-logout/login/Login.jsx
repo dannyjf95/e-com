@@ -6,7 +6,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { user, userFetchLoading, userFetchError, loggedIn } = useSelector(selectUser);
 
   if (loggedIn) {
@@ -15,7 +15,7 @@ export default function Login() {
   //turn into handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
+    dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
   };
 
   return (

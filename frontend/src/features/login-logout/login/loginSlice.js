@@ -19,7 +19,7 @@ export const userLoginSlice = createSlice({
       state.loginError = null;
     });
     builder.addCase(fetchUserLogin.fulfilled, (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.loginLoading = false;
       state.loginError = null;
       state.user = action.payload;

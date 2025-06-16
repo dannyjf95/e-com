@@ -7,9 +7,10 @@ export default function Category({ category }) {
   // console.log(category);
   return (
     //onmouseover
-    <div onMouseEnter={() => setSubsVisible(true)} onMouseLeave={() => setSubsVisible(setSubsVisible(false))}>
-      {category.name}
-      {subsVisible && <DropDown data={category} />}
+    <div  className="category" onMouseEnter={() => setSubsVisible(true)} onMouseLeave={() => setSubsVisible(setSubsVisible(false))}>
+      <div className="category-name"> {category.name}</div>
+      <div className="sub-cat-dropdown">{subsVisible && <DropDown data={category} />}</div>
+      {/* <div className="sub-cat-dropdown">{<DropDown data={category} />}</div> */}
     </div>
   );
 }

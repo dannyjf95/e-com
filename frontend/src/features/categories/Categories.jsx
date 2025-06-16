@@ -28,8 +28,3 @@ export default function Categories() {
   );
 }
 
-/*
-{ {categoriesFetchError && <p>{categoriesFetchError.error}</p>}
-      {categoriesFetchLoading && <p>loading</p>}
-      {categories.rows && <pre>{JSON.stringify(categories.rows, null, 3)}</pre>} }
-*/

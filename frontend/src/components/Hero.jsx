@@ -15,17 +15,21 @@ export default function Hero() {
   if (sessionLoading) return <p>Loading session...</p>;
 
   return (
-    <>
+    <div className="root">
       <div className="nav">
         <Link to={"/"}>Home/LOGO</Link>
         <Link to={"/cart"}>Cart</Link>
 
         {user === null && <Link to={"/login"}>Login</Link>}
-        {user && <span>{user.name}</span>}
+        {user && (
+          <span>
+            <Link to={"/account"}>{user.name}</Link>
+          </span>
+        )}
       </div>
-      <div className="nav">
+      <div className="categories">
         <Categories />
       </div>
-    </>
+    </div>
   );
 }
