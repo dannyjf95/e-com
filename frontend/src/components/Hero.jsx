@@ -12,7 +12,7 @@ export default function Hero() {
   //categories shop
   // const categories = useSelector(selectCategories);
 
-  if (sessionLoading) return <p>Loading session...</p>;
+  // if (sessionLoading) return <p>Loading session...</p>;
 
   return (
     <div className="root">
@@ -20,10 +20,13 @@ export default function Hero() {
         <Link to={"/"}>Home/LOGO</Link>
         <Link to={"/cart"}>Cart</Link>
 
-        {user === null && <Link to={"/login"}>Login</Link>}
-        {user && (
+        {sessionLoading ? (
+          <p>Loading session...</p>
+        ) : user === null ? (
+          <Link to="/login">Login</Link>
+        ) : (
           <span>
-            <Link to={"/account"}>{user.name}</Link>
+            <Link to="/account">{user.name}</Link>
           </span>
         )}
       </div>

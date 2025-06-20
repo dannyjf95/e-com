@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchUserSession } from "../sessionCheck/userSessionThunk";
+import { fetchUserLogin } from "../login/loginThunk";
 
 export const userSessionSlice = createSlice({
   name: "userSession",
@@ -18,7 +19,7 @@ export const userSessionSlice = createSlice({
       state.sessionError = null;
     });
     builder.addCase(fetchUserSession.fulfilled, (state, action) => {
-      console.log("HERE", action.payload);
+      // console.log("HERE", action.payload);
       state.sessionLoading = false;
       state.sessionError = null;
       state.loggedIn = action.payload !== null;
@@ -28,6 +29,11 @@ export const userSessionSlice = createSlice({
       state.sessionLoading = false;
       state.sessionError = "Session restore failed";
       // state.sessionError = action.payload.message || "Session restore failed";
+    });
+    //refreshes after user login
+    builder.addCase(fetchUserLogin.fulfilled, (state, action) => {
+      state.userSession = action.payload;
+      state.sessionLoading = false;
     });
   },
 });

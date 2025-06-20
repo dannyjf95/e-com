@@ -1,10 +1,10 @@
 import { getThunkCreator } from "../../utils/getThunkCreator";
-const API_CATEGORIES = "http://localhost:5000/user";
+const API_CATEGORIES = "http://localhost:5000/users/1/orders";
 
-export const fetchCategories = getThunkCreator({
-  actionType: "categories/fetchCategories",
+export const fetchUserOrders = getThunkCreator({
+  actionType: "userOrders/fetchUserOrders",
   apiEndpoint: API_CATEGORIES,
-  dataKey: "categories",
+  dataKey: null,
   method: "GET",
   headers: { "Content-Type": "application/json" },
   body: null,

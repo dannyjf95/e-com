@@ -5,7 +5,7 @@
 }
 
 .account-header {
-    font-size: 2rem;
+  font-size: 2rem;
   color: green;
   display: flex;
   gap: 3rem;
@@ -13,16 +13,31 @@
 }
 
 .user {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
+  text-align: start;
 }
-.pages{
+.pages {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 0  10px;
-  gap: .3rem;
-  
+  padding: 10px 0 10px;
+  gap: 0.3rem;
 }
 .pages :hover {
-   
+}
+
+.account-content {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  background-color: rgb(3, 70, 3);
+  width: 100%;
+  /* display: flex; */
+  padding: 10px;
+}
+.account-nav-links {
+  background-color: rgb(103, 103, 11);
+}
+.content-box {
+  padding: 10px;
+  background-color: rgb(132, 97, 103);
 }

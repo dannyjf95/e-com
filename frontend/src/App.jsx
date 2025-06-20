@@ -9,7 +9,7 @@ import { fetchUserLogin } from "./features/login-logout/login/loginThunk";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
+    dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
     dispatch(fetchUserSession());
   }, [dispatch]);
 

@@ -10,6 +10,7 @@ export const getThunkCreator = ({
   // params = null,
 }) => {
   return createAsyncThunk(actionType, async (params, thunkAPI) => {
+  
     // console.log(params);
     // {catename: 'footware', subcatname: 'running shoes'}
     try {
@@ -30,8 +31,8 @@ export const getThunkCreator = ({
       }
 
       const data = await response.json();
-
-      // console.log("✅ Fetch success:", apiEndpoint, data);
+// console.log(data)
+      console.log("✅ Fetch success:", apiEndpoint, data);
       return dataKey ? data[dataKey] : data;
     } catch (error) {
       console.error("❌ API Error:", apiEndpoint, error);

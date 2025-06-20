@@ -5,6 +5,7 @@ import categoriesReducer from "../../features/categories/categoriesSlice";
 import cartReducer from "../../features/cart/cartSlice";
 import loginReducer from "../../features/login-logout/login/loginSlice";
 import userSessionReducer from "../../features/login-logout/sessionCheck/userSessionSlice";
+import userOrdersReducer from "../../features/account/accountSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +14,7 @@ export const store = configureStore({
     cart: cartReducer,
     user: loginReducer,
     userSession: userSessionReducer,
+    userOrders: userOrdersReducer,
   },
 });
+ 

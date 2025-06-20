@@ -12,7 +12,7 @@ const {
   getUserOrders,
   getUserOrder,
 } = require("../controllers/userController");
-
+ 
 //admin
 users.get("/", getAllUsers); // complete
 
@@ -31,3 +31,4 @@ users.get("/:id/orders/:orderid", getUserOrder); //complete
 
 users.get("/user/:username", getUsername); //testing  / admin
 module.exports = users;
+   

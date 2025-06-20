@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+
 //components
 const RootLayout = React.lazy(() => import("./RouteLayout"));
 
@@ -7,7 +8,11 @@ const Items = React.lazy(() => import("../features/items/Items"));
 const Cart = React.lazy(() => import("../features/cart/Cart"));
 const Login = React.lazy(() => import("../features/login-logout/login/Login"));
 const Categories = React.lazy(() => import("../features/categories/Categories"));
+// account and nested
 const Account = React.lazy(() => import("../features/account/Account"));
+const Orders = React.lazy(() => import("../features/account/Orders"));
+const OrdersList = React.lazy(() => import("../features/account/OrdersList"));
+const OrderSummary = React.lazy(() => import("../features/account/OrderSummary"));
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -45,7 +50,19 @@ const router = createBrowserRouter(
             <Account />
           </Suspense>
         }
-      />
+      >
+        <Route
+          path="orders"
+          element={
+            <Suspense fallback={<div>Loading Orders...</div>}>
+              <Orders />
+            </Suspense>
+          }
+        >
+          <Route index element={<OrdersList />} />
+          <Route path=":id" element={<OrderSummary />} />
+        </Route>
+      </Route>
     </>
   )
 );

@@ -67,7 +67,7 @@ app.use(passport.session()); // Add this to manage user session
 //   }
 //   return res.status(401).send("Unauthorized path, log in to gain access");
 // };
-
+   
 app.get("/session", (req, res) => {
   // if (req.user) console.log(req.user);
   if (req.isAuthenticated()) {
@@ -76,14 +76,14 @@ app.get("/session", (req, res) => {
     res.json({ user: null });
   }
 });
-
+        
 app.use("/", async (req, res, next) => {
   req.isAdmin = true;
 
   if (!req.session.cart) {
     req.session.cart = [];
-  }
-
+  } 
+ 
   if (req.user) {
     // console.log('yes')
     if (!req.session.userCart) {
@@ -133,7 +133,7 @@ app.use("/cart", cartRouter);
 */
 const searchRouter = require("./src/routes/searchRoutes");
 app.use("/search", searchRouter);
-
+ 
 /*
 LOGIN / LOGOUT
 */
@@ -143,17 +143,17 @@ app.use("/account/", loginRouter);
 const logoutRouter = require("./src/routes/logoutRoutes");
 app.use("/logout", logoutRouter);
 
-/**
+/** 
  TEST ROUTES 
 */
 const testRouter = require("./src/routes/admin/testRoutes");
 app.use("/test", testRouter);
-
+ 
 /** 
- * 
- HOME PAGE 
-*/
-
+ *    
+ HOME PAGE  
+*/ 
+  
 app.get("/", async (req, res) => {
   const loginMessage = req.flash("login")[0];
   const loggedOutMessage = req.flash("loggedOut")[0];
