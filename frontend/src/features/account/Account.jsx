@@ -3,11 +3,14 @@ import { Link, Outlet } from "react-router-dom";
 import "./account.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserSession } from "../login-logout/sessionCheck/userSessionSlice";
+
 import { fetchUserOrders } from "./accountThunk";
 import Orders from "./Orders";
 
+
 export default function Account() {
   const { userSession, sessionLoading } = useSelector(selectUserSession);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

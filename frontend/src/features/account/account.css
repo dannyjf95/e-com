@@ -41,3 +41,7 @@
   padding: 10px;
   background-color: rgb(132, 97, 103);
 }
+.order-list {
+  display: flex;
+  flex-direction: column;
+}
