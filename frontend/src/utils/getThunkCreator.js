@@ -32,7 +32,7 @@ export const getThunkCreator = ({
 
       const data = await response.json();
 // console.log(data)
-      console.log("✅ Fetch success:", apiEndpoint, data);
+      // console.log("✅ Fetch success:", apiEndpoint, data);
       return dataKey ? data[dataKey] : data;
     } catch (error) {
       console.error("❌ API Error:", apiEndpoint, error);

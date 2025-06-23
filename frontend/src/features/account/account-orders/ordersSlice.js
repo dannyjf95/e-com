@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserOrders } from "./accountThunk";
+import { fetchUserOrders } from "./ordersThunk";
 
 export const userOrdersSlice = createSlice({
   name: "userOrders",

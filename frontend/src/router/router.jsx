@@ -10,9 +10,9 @@ const Login = React.lazy(() => import("../features/login-logout/login/Login"));
 const Categories = React.lazy(() => import("../features/categories/Categories"));
 // account and nested
 const Account = React.lazy(() => import("../features/account/Account"));
-const Orders = React.lazy(() => import("../features/account/Orders"));
-const OrdersList = React.lazy(() => import("../features/account/OrdersList"));
-const OrderSummary = React.lazy(() => import("../features/account/OrderSummary"));
+const Orders = React.lazy(() => import("../features/account/account-orders/Orders"));
+const OrdersList = React.lazy(() => import("../features/account/account-orders/OrdersList"));
+const OrderSummary = React.lazy(() => import("../features/account/account-orders/order/OrderSummary"));
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>

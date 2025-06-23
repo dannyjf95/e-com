@@ -6,18 +6,16 @@ export default function SubCategories({ data }) {
 
   return (
     <>
-      
-        {data &&
-          data.subCats.map((sub, idx) => {
-            return (
-              <div className="links">
-                <Link key={idx} to={`categories/${catname}/${sub.name}`}>
-                  {sub.name}
-                </Link>
-              </div>
-            );
-          })}
-
+      {data &&
+        data.subCats.map((sub, idx) => {
+          return (
+            <div key={idx} className="links">
+              <Link to={`categories/${catname}/${sub.name}`}>
+                {sub.name}
+              </Link>
+            </div>
+          );
+        })}
     </>
   );
 }

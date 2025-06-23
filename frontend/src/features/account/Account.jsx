@@ -3,10 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import "./account.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserSession } from "../login-logout/sessionCheck/userSessionSlice";
-
-import { fetchUserOrders } from "./accountThunk";
-import Orders from "./Orders";
-
+import { fetchUserOrders } from "./account-orders/ordersThunk";
 
 export default function Account() {
   const { userSession, sessionLoading } = useSelector(selectUserSession);
@@ -35,7 +32,7 @@ export default function Account() {
       </div>
       <div className="account-content">
         <div className="account-nav-links">
-          <div className="user">{`Hi, ${userSession.name}`}</div>
+          <div className="user">{`Hi, ${userSession.name[0].toUpperCase().slice(0)}${userSession.name.slice(1)}`}</div>
           <div className="pages">
             <Link to="/account/orders">Orders</Link>
             <a>sign out</a>

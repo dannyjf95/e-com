@@ -1,0 +1,14 @@
+.order-box {
+  background-color: grey;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  margin: 10px;
+}
+.details-box {
+    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  
+}
