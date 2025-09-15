@@ -45,6 +45,7 @@ export default function Card({ item }) {
         <div>{item.price}</div>
 
         <form onSubmit={handleAddToCart}>
+          {/* ITEM SHOP CARD */}
           <input type="hidden" value={item.id} name="itemId" />
           <select name="size" value={itemForm.size} onChange={handleItemChange} required>
             <option value="">Size</option>

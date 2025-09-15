@@ -1,22 +1,11 @@
-.category-name {
-  display: flex; 
-  justify-content: flex-start;
-  /* background-color: #4caf50; */
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  min-width: 110px;
-  position: relative;
-}
-
-.sub-cat-dropdown {
-  background-color: white;
-  position: relative;
-  z-index: 1;
-
-}
-.category {
+.categories {
+  background-color: grey;
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  justify-content: space-between;
+  
 }
+.category-name {
+  padding: 16px;
+  font-size: 20px;
+}
+

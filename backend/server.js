@@ -14,6 +14,7 @@ const cors = require("cors");
 process.on("warning", (warning) => {
   console.log("warning", warning.stack);
 });
+// console.log("here", process.argv[2]);
 // const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session"); //session
 const flash = require("connect-flash");
@@ -67,7 +68,7 @@ app.use(passport.session()); // Add this to manage user session
 //   }
 //   return res.status(401).send("Unauthorized path, log in to gain access");
 // };
-   
+
 app.get("/session", (req, res) => {
   // if (req.user) console.log(req.user);
   if (req.isAuthenticated()) {
@@ -76,14 +77,16 @@ app.get("/session", (req, res) => {
     res.json({ user: null });
   }
 });
-        
+
 app.use("/", async (req, res, next) => {
+  console.log("HERE@", req.session.guestCart ? req.session.userCart : "no  cart");
+  // console.log(req.session)
   req.isAdmin = true;
 
   if (!req.session.cart) {
     req.session.cart = [];
-  } 
- 
+  }
+
   if (req.user) {
     // console.log('yes')
     if (!req.session.userCart) {
@@ -133,7 +136,7 @@ app.use("/cart", cartRouter);
 */
 const searchRouter = require("./src/routes/searchRoutes");
 app.use("/search", searchRouter);
- 
+
 /*
 LOGIN / LOGOUT
 */
@@ -148,12 +151,12 @@ app.use("/logout", logoutRouter);
 */
 const testRouter = require("./src/routes/admin/testRoutes");
 app.use("/test", testRouter);
- 
+
 /** 
  *    
  HOME PAGE  
-*/ 
-  
+*/
+ 
 app.get("/", async (req, res) => {
   const loginMessage = req.flash("login")[0];
   const loggedOutMessage = req.flash("loggedOut")[0];
@@ -198,4 +201,3 @@ if (require.main === module) {
 }
 
 module.exports = app;
- 

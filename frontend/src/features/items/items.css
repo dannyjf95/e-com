@@ -1,6 +1,6 @@
 .item-section {
   display: flex;
-  gap: 1rem;
+  /* gap: .5rem; */
   flex-direction: column;
 }
 
@@ -9,7 +9,8 @@
     gap: 1rem;
 }
 .bread-crumb {
+    padding: 10px 0px;
     text-align: start;
     color: rgba(255, 255, 255, 0.416);
-    font-size: .8rem;
+    font-size: 1rem;
 }

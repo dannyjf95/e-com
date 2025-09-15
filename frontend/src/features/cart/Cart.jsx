@@ -4,6 +4,7 @@ import { fetchCart, deleteFromCart } from "./cartThunk";
 import { selectCart } from "./cartSlice";
 import { selectUser } from "../login-logout/login/loginSlice";
 import "./cart.css";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -25,18 +26,18 @@ export default function Cart() {
     typeOfUser = cart["guest cart"];
   }
   const userCart = typeOfUser;
-console.log(userCart)
+  console.log(userCart);
   const items =
     typeOfUser &&
     typeOfUser.items.map((item) => {
-      console.log(item)
+      console.log(item);
       return {
         name: item.name,
         size: item.size.toUpperCase(),
         space: "",
-        price: `£${item.price}`,  
+        price: `£${item.price}`,
         quantity: `QTY ${item.quantity} `,
-        button: <button onClick={() => dispatch(deleteFromCart({cartItemId: item.cartItemId}))}>Remove</button>,
+        button: <button onClick={() => dispatch(deleteFromCart({ cartItemId: item.cartItemId }))}>Remove</button>,
       };
     });
 
@@ -47,6 +48,7 @@ console.log(userCart)
   // console.log(typeof userCart.cartTotal, userCart.cartTotal);
   return (
     <div>
+      <Link to={"/"}>Home</Link>
       <div className="cart-box">
         <div className="items">
           Cart
@@ -71,8 +73,3 @@ console.log(userCart)
     </div>
   );
 }
-
-/**
-   
-  
-  */

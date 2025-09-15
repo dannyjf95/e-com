@@ -1,9 +1,10 @@
-.dropdown {
-
-  position: absolute;
-  padding: 16px;
-  display: flex;
-  /* justify-content: flex-start; */
-  flex-direction: column;
-  align-items: flex-start;
+.subcats  {
+    font-size: 1.2rem;
+    display: flex;
+    padding:  16px;
+    gap: 2rem;
+    color: black;
 }
+/* a:visited {
+    text-decoration: ;
+} */

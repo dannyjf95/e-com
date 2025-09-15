@@ -26,11 +26,15 @@ const router = createBrowserRouter(
         }
       >
         <Route path="categories/:catname/:subcatname" element={<Items />} />
-        <Route path="cart" element={<Cart />} />
+
         <Route path="categories" element={<Categories />} />
         {/* other nested routes */}
       </Route>
 
+      {/* added indepent cart  page for  now */}
+      <Route>
+        <Route path="cart" element={<Cart />} />
+      </Route>
       {/*  */}
 
       {/* Public route: Login */}

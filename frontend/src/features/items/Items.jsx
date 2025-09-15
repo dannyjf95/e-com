@@ -23,7 +23,7 @@ export default function Items() {
   }
   return (
     <div className="item-section">
-      <p>{itemFetchError && itemFetchError.error}</p>
+      {itemFetchError && itemFetchError.error}
       {itemFetchLoading && <p>loading</p>}
 
       <div className="bread-crumb">{`${catname} > ${subcatname}`}</div>

@@ -1,5 +1,19 @@
 .cat-container {
-  /* position: relative; */
   width: 100%;
-  display: flex;
+}
+
+.categories {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-container {
+  position: absolute;
+  background-color: white;
+  height: 100px;
+  width: 100%;
+ 
+}
+.dropdown  {
+  color: black;
 }
