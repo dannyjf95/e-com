@@ -1,0 +1,11 @@
+understanding outet:
+   - outlet renders child routes when it has mathced path from the router within the parents routes
+
+example account/orders
+    - Account is the layout and orders area child within, also in the router the orders are children of the outer account route tag (see below)
+    <Account> 
+        <Orders/> 
+    </Account>
+    outlet here is <Orders/>
+
+    - so when a parent is rendered/loaded outlet gets given the child element that matches the path to the parents path

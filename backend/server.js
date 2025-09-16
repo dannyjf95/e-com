@@ -79,7 +79,7 @@ app.get("/session", (req, res) => {
 });
 
 app.use("/", async (req, res, next) => {
-  console.log("HERE@", req.session.guestCart ? req.session.userCart : "no  cart");
+  // console.log("HERE@", req.session.guestCart ? req.session.userCart : "no  cart");
   // console.log(req.session)
   req.isAdmin = true;
 

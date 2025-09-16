@@ -9,7 +9,7 @@ export default function Category({ category, visible, setVisible, setCurCat }) {
   return (
     //onmouseover
     <>
-      <div className="category" onMouseEnter={mouseEnter} onMouseLeave={() => setVisible(false)}>
+      <div className="category" onMouseEnter={mouseEnter} >
         <div className="category-name">{category.name}</div>
       </div>
     </>

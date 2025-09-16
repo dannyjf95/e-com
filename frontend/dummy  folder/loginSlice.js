@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserLogin } from "./loginThunk";
-import { fetchUserSession } from "../sessionCheck/userSessionThunk";
+import { fetchUserLogin } from "../src/features/login-logout/login/loginThunk";
+import { fetchUserSession } from "./sessionCheck/userSessionThunk";
+import { userLogout } from "../src/features/login-logout/logout/logoutThunk";
 
 export const userLoginSlice = createSlice({
   name: "user",
@@ -45,6 +46,10 @@ export const userLoginSlice = createSlice({
     builder.addCase(fetchUserSession.rejected, (state, action) => {
       state.sessionLoading = false;
       state.sessionError = action.payload || "Session restore failed";
+    });
+    builder.addCase(userLogout.fulfilled, (state, action) => {
+      state.user = null;
+      state.loggedIn = false;
     });
   },
 });

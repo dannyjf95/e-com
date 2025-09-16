@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import Logout from "../features/login-logout/logout/Logout";
 
 //components
 const RootLayout = React.lazy(() => import("./RouteLayout"));
@@ -27,7 +28,7 @@ const router = createBrowserRouter(
       >
         <Route path="categories/:catname/:subcatname" element={<Items />} />
 
-        <Route path="categories" element={<Categories />} />
+        {/* <Route path="categories" element={<Categories />} /> */}
         {/* other nested routes */}
       </Route>
 
@@ -67,6 +68,8 @@ const router = createBrowserRouter(
           <Route path=":id" element={<OrderSummary />} />
         </Route>
       </Route>
+      {/* logout */}
+      <Route path="/logout" element={<Logout />}></Route>
     </>
   )
 );

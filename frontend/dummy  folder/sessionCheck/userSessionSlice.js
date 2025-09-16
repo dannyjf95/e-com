@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-import { fetchUserSession } from "../sessionCheck/userSessionThunk";
-import { fetchUserLogin } from "../login/loginThunk";
+import { fetchUserSession } from "./userSessionThunk";
+import { fetchUserLogin } from "../../src/features/login-logout/login/loginThunk";
+import { userLogout } from "../../src/features/login-logout/logout/logoutThunk";
 
 export const userSessionSlice = createSlice({
   name: "userSession",
@@ -23,6 +23,7 @@ export const userSessionSlice = createSlice({
       state.sessionLoading = false;
       state.sessionError = null;
       state.loggedIn = action.payload !== null;
+      console.log(state.userSession);
       state.userSession = action.payload;
     });
     builder.addCase(fetchUserSession.rejected, (state, action) => {
@@ -34,6 +35,9 @@ export const userSessionSlice = createSlice({
     builder.addCase(fetchUserLogin.fulfilled, (state, action) => {
       state.userSession = action.payload;
       state.sessionLoading = false;
+    });
+    builder.addCase(userLogout.fulfilled, (state, action) => {
+      state.loggedIn = false;
     });
   },
 });

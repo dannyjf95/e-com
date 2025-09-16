@@ -1,9 +1,4 @@
-.categories {
-  background-color: grey;
-  display: flex;
-  justify-content: space-between;
-  
-}
+
 .category-name {
   padding: 16px;
   font-size: 20px;

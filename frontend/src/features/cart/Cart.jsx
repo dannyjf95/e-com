@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart, deleteFromCart } from "./cartThunk";
 import { selectCart } from "./cartSlice";
-import { selectUser } from "../login-logout/login/loginSlice";
+import { selectUser } from "../../../dummy  folder/loginSlice";
 import "./cart.css";
 import { Link } from "react-router-dom";
 
@@ -15,10 +15,6 @@ export default function Cart() {
     dispatch(fetchCart());
   }, [user, dispatch]);
 
-  for (let i in cart) {
-    // console.log(cart);
-  }
-
   let typeOfUser;
   if (cart["user cart"]) {
     typeOfUser = cart["user cart"];
@@ -26,7 +22,7 @@ export default function Cart() {
     typeOfUser = cart["guest cart"];
   }
   const userCart = typeOfUser;
-  console.log(userCart);
+  // console.log(userCart);
   const items =
     typeOfUser &&
     typeOfUser.items.map((item) => {

@@ -1,16 +1,20 @@
 .cat-container {
+  
   width: 100%;
 }
 
 .categories {
   position: relative;
   width: 100%;
+  background-color: grey;
+  display: flex;
+  justify-content: space-between;
 }
 
 .dropdown-container {
   position: absolute;
   background-color: white;
-  height: 100px;
+  /* height: 100px; */
   width: 100%;
  
 }

@@ -7,7 +7,7 @@ import Category from "../category/Category";
 import "./categories.css";
 import DropDown from "../../components/dropdown/DropDown";
 export default function Categories() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [curCat, setCurCat] = useState('');
   const dispatch = useDispatch();
   const { categories, categoriesFetchLoading, categoriesFetchError } = useSelector(selectCategories);
@@ -36,7 +36,7 @@ export default function Categories() {
             })}
         </div>
         {visible && (
-          <div className="dropdown-container">
+          <div className="dropdown-container"  onMouseLeave={() => setVisible(false)}>
             {visible && <DropDown data={data} curCat={curCat} />}
           </div>
         )}
