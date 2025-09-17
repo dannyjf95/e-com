@@ -77,10 +77,10 @@ app.get("/session", (req, res) => {
     res.json({ user: null });
   }
 });
-
+  
 app.use("/", async (req, res, next) => {
-  // console.log("HERE@", req.session.guestCart ? req.session.userCart : "no  cart");
-  // console.log(req.session)
+  console.log("HERE@", req.session.guestCart ? req.session.userCart : "no  cart");
+  console.log(req.session)
   req.isAdmin = true;
 
   if (!req.session.cart) {

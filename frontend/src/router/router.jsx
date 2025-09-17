@@ -2,6 +2,8 @@ import React, { Suspense } from "react";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import Logout from "../features/login-logout/logout/Logout";
 
+//spinner
+import Spinner from "../components/customs/Spinner";
 //components
 const RootLayout = React.lazy(() => import("./RouteLayout"));
 
@@ -11,6 +13,7 @@ const Login = React.lazy(() => import("../features/login-logout/login/Login"));
 const Categories = React.lazy(() => import("../features/categories/Categories"));
 // account and nested
 const Account = React.lazy(() => import("../features/account/Account"));
+const UserAccount = React.lazy(() => import("../features/account/user-account/UserAccount"));
 const Orders = React.lazy(() => import("../features/account/account-orders/Orders"));
 const OrdersList = React.lazy(() => import("../features/account/account-orders/OrdersList"));
 const OrderSummary = React.lazy(() => import("../features/account/account-orders/order/OrderSummary"));
@@ -21,7 +24,13 @@ const router = createBrowserRouter(
       <Route
         path="/"
         element={
-          <Suspense fallback={<div>Loading ...</div>}>
+          <Suspense
+            fallback={
+              <div>
+                
+              </div>
+            }
+          >
             <RootLayout />
           </Suspense>
         }
@@ -42,7 +51,13 @@ const router = createBrowserRouter(
       <Route
         path="/login"
         element={
-          <Suspense fallback={<div>Loading login...</div>}>
+          <Suspense
+            fallback={
+              <div>
+                <Spinner />
+              </div>
+            }
+          >
             <Login />
           </Suspense>
         }
@@ -51,7 +66,13 @@ const router = createBrowserRouter(
       <Route
         path="/account"
         element={
-          <Suspense fallback={<div>Loading profile...</div>}>
+          <Suspense
+            fallback={
+              <div>
+                <Spinner />
+              </div>
+            }
+          >
             <Account />
           </Suspense>
         }
@@ -67,7 +88,16 @@ const router = createBrowserRouter(
           <Route index element={<OrdersList />} />
           <Route path=":id" element={<OrderSummary />} />
         </Route>
+        <Route
+          path="my-account"
+          element={
+            <Suspense fallback={<div>Loading Account...</div>}>
+              <UserAccount />
+            </Suspense>
+          }
+        ></Route>
       </Route>
+
       {/* logout */}
       <Route path="/logout" element={<Logout />}></Route>
     </>

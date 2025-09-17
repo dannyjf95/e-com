@@ -11,7 +11,7 @@ auth.post("/login", async (req, res, next) => {
         return next(err);
       }
       if (!user) {
-        return res.status(400).json({ message: "username does not exist" });
+        return res.status(400).json({ message: "username or password is incorrect!" });
       }
       req.logIn(user, async (err) => {
         if (err) {

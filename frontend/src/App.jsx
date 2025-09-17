@@ -4,21 +4,30 @@ import router from "./router/router";
 import { RouterProvider } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserSession } from "../dummy  folder/sessionCheck/userSessionThunk";
-// import { selectUserSession } from "./features/login-logout/sessionCheck/userSessionSlice";
-// import { fetchUserLogin } from "./features/login-logout/login/loginThunk";
+import Spinner from "./components/customs/Spinner";
+
+//spinner
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
+    //auto loggerinner
     // dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
     dispatch(fetchUserSession());
   }, [dispatch]);
 
   const { userAuthLoading } = useSelector((state) => state.userAuth);
 
-  if (userAuthLoading) return <div>Loading session...</div>;
+  if (userAuthLoading) return <div>Loading...</div>;
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div>
+          <Spinner />
+        </div>
+      }
+    >
       <RouterProvider router={router} />
     </Suspense>
   );
