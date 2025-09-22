@@ -1,22 +1,28 @@
 import React, { Suspense } from "react";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import Logout from "../features/login-logout/logout/Logout";
+// import Logout from "../features/login-logout/logout/Logout";
 
 //spinner
 import Spinner from "../components/customs/Spinner";
 //components
 const RootLayout = React.lazy(() => import("./RouteLayout"));
-
+//auth
+const Login = React.lazy(() => import("../features/login-logout/login/Login"));
+const LogOut = React.lazy(() => import("../features/login-logout/logout/LogOut"));
+const SignUp = React.lazy(() => import("../features/sign-up/SignUp"));
+// guest/user shopping & cart
 const Items = React.lazy(() => import("../features/items/Items"));
 const Cart = React.lazy(() => import("../features/cart/Cart"));
-const Login = React.lazy(() => import("../features/login-logout/login/Login"));
 const Categories = React.lazy(() => import("../features/categories/Categories"));
+
 // account and nested
 const Account = React.lazy(() => import("../features/account/Account"));
 const UserAccount = React.lazy(() => import("../features/account/user-account/UserAccount"));
 const Orders = React.lazy(() => import("../features/account/account-orders/Orders"));
 const OrdersList = React.lazy(() => import("../features/account/account-orders/OrdersList"));
 const OrderSummary = React.lazy(() => import("../features/account/account-orders/order/OrderSummary"));
+
+//router to be used with outlet in RouteLayout which ever path is matched will be  child rendered as "outlet"
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -24,13 +30,7 @@ const router = createBrowserRouter(
       <Route
         path="/"
         element={
-          <Suspense
-            fallback={
-              <div>
-                
-              </div>
-            }
-          >
+          <Suspense fallback={<div></div>}>
             <RootLayout />
           </Suspense>
         }
@@ -47,7 +47,7 @@ const router = createBrowserRouter(
       </Route>
       {/*  */}
 
-      {/* Public route: Login */}
+      {/* Public route: Login/ signup */}
       <Route
         path="/login"
         element={
@@ -62,6 +62,23 @@ const router = createBrowserRouter(
           </Suspense>
         }
       />
+
+      <Route
+        path="/sign-up"
+        element={
+          <Suspense
+            fallback={
+              <div>
+                {" "}
+                <Spinner />
+              </div>
+            }
+          >
+            <SignUp/>
+          </Suspense>
+        }
+      />
+
       {/* Private access: account*/}
       <Route
         path="/account"
@@ -99,7 +116,7 @@ const router = createBrowserRouter(
       </Route>
 
       {/* logout */}
-      <Route path="/logout" element={<Logout />}></Route>
+      <Route path="/logout" element={<LogOut />}></Route>
     </>
   )
 );

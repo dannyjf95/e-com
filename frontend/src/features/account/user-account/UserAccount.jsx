@@ -11,7 +11,9 @@ export default function UserAccount() {
       <div>
         <p>{name}</p>
       </div>
-      <div><p>{email}</p></div>
+      <div>
+        <p>{email}</p>
+      </div>
     </div>
   );
 }

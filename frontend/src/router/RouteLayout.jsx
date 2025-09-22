@@ -7,8 +7,7 @@ export default function RootLayout() {
   return (
     <>
       <Hero />
-      <Outlet />
-      
+      <Outlet />      
     </>
   );
 }

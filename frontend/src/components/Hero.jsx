@@ -8,12 +8,12 @@ import Login from "../features/login-logout/login/Login";
 // import { selectCategories } from "../features/categories/categoriesSlice";
 export default function Hero() {
   //user
-  const { user, userAuthLoading, userAuthError,  loggedIn } = useSelector(selectUserAuth);
+  const { user, userAuthLoading, userAuthError, loggedIn } = useSelector(selectUserAuth);
   //categories shop
   // const categories = useSelector(selectCategories);
 
   // if (sessionLoading) return <p>Loading session...</p>;
-// console.log(user)
+  // console.log(user)
   return (
     <div className="root">
       <div className="nav">
@@ -23,7 +23,15 @@ export default function Hero() {
         {userAuthLoading ? (
           <p>Loading session...</p>
         ) : user === null ? (
-          <Link to="/login">Login</Link>
+          <div style={{ display: "flex", gap: ".5rem" }}>
+            <div>
+              <Link to="/login">Login</Link>
+            </div>
+            <span style={{ fontSize: "1rem", display: "flex", alignItems: "center" }}>|</span>
+            <div>
+              <Link to={"/sign-up"}>Sign up</Link>
+            </div>
+          </div>
         ) : (
           <span>
             <Link to="/account">{user.name}</Link>
