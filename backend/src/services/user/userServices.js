@@ -18,6 +18,8 @@ class User {
       req.flash("usercreated", "Successfully created account");
       return res.redirect("/");
     });
+    //if  wanting users to login after creating =  more safe but would be seen as "annoying"
+    // return res.redirect("/");
   }
 
   async getAllUsers() {
@@ -61,13 +63,13 @@ class User {
 
   async getUserOrder(req) {
     //alter back to just req.user id
-    console.log(req.params.orderid)
+    console.log(req.params.orderid);
     const a = await models.Orders.findOne({
       where: { id: parseInt(req.params.orderid) },
       include: { model: models.Order_items, include: [models.Items] },
     });
-    console.log(a)
-    
+    console.log(a);
+
     return {
       orderTotal: a.order_total,
       items: a.Order_items.map((item) => ({
