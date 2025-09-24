@@ -5,12 +5,22 @@ const User = require("../services/user/userServices");
 const userInstance = new User();
 //CREATE
 const createUser = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     await userInstance.create(req, res);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "Something went wrong" });
+    // console.log(error.errors[0]);
+    let errorMessage;
+
+    const errorType = error && error.errors && error.errors[0];
+
+    if (errorType && errorType.type === "unique violation") {
+      if (errorType.path === "email") {
+        errorMessage = "Email is already taken";
+       
+      }
+    }
+    return res.status(500).json({ error: errorMessage });
   }
 };
 /*

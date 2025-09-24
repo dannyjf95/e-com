@@ -29,7 +29,7 @@ export default function Hero() {
             </div>
             <span style={{ fontSize: "1rem", display: "flex", alignItems: "center" }}>|</span>
             <div>
-              <Link to={"/sign-up"}>Sign up</Link>
+              <Link to={"/register"}>Sign up</Link>
             </div>
           </div>
         ) : (

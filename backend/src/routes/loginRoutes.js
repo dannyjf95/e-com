@@ -4,7 +4,7 @@ const passport = require("passport");
 const passport_local = require("../../config/passport-local");
 // LOGIN
 auth.post("/login", async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     passport.authenticate("local", (err, user, info) => {
       if (err) {

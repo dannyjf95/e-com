@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const postThunkCreator = ({ actionType = null, apiEndpoint = null, dataKey = null, params = null }) => {
   return createAsyncThunk(actionType, async (body, thunkAPI) => {
-    // console.log(body);
+    console.log(body, params);
     try {
       const path = params ? Object.values(params).join("/") : "";
       const options = {
@@ -25,7 +25,7 @@ export const postThunkCreator = ({ actionType = null, apiEndpoint = null, dataKe
       console.log("✅ Fetch success:", apiEndpoint, data);
       return dataKey ? data[dataKey] : data;
     } catch (error) {
-      // console.error("❌ API Error:", apiEndpoint, error);
+      console.error("❌ API Error:", apiEndpoint, error);
       return thunkAPI.rejectWithValue({ error: "Something went wrong while fetching" });
     }
   });

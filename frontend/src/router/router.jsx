@@ -9,7 +9,7 @@ const RootLayout = React.lazy(() => import("./RouteLayout"));
 //auth
 const Login = React.lazy(() => import("../features/login-logout/login/Login"));
 const LogOut = React.lazy(() => import("../features/login-logout/logout/LogOut"));
-const SignUp = React.lazy(() => import("../features/sign-up/SignUp"));
+const Register = React.lazy(() => import("../features/register/Register"));
 // guest/user shopping & cart
 const Items = React.lazy(() => import("../features/items/Items"));
 const Cart = React.lazy(() => import("../features/cart/Cart"));
@@ -47,7 +47,7 @@ const router = createBrowserRouter(
       </Route>
       {/*  */}
 
-      {/* Public route: Login/ signup */}
+      {/* Public route: Login/ Register */}
       <Route
         path="/login"
         element={
@@ -64,7 +64,7 @@ const router = createBrowserRouter(
       />
 
       <Route
-        path="/sign-up"
+        path="/register"
         element={
           <Suspense
             fallback={
@@ -74,7 +74,7 @@ const router = createBrowserRouter(
               </div>
             }
           >
-            <SignUp/>
+            <Register/>
           </Suspense>
         }
       />

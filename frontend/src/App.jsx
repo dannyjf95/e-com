@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserSession } from "../dummy  folder/sessionCheck/userSessionThunk";
 import Spinner from "./components/customs/Spinner";
+import { fetchUserLogin } from "./features/login-logout/login/loginThunk";
 
 //spinner
 
@@ -12,7 +13,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     //auto loggerinner
-    // dispatch(fetchUserLogin({ username: "dan", password: "dan" }));
+    // dispatch(fetchUserLogin({ email: "dan", password: "dan@dan.com" }));
     dispatch(fetchUserSession());
   }, [dispatch]);
 

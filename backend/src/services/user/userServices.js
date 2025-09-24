@@ -119,11 +119,5 @@ class User {
     });
   }
 }
-//get
-
-//post
-
-//update
-//delete
 
 module.exports = User;

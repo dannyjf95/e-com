@@ -8,7 +8,7 @@ export default function Login() {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const { user, userAuthLoading, userAuthError, loggedIn } = useSelector(selectUserAuth);
-  console.log(userAuthLoading, userAuthError);
+  // console.log(userAuthLoading, userAuthError);
 
   if (loggedIn) {
     return <Navigate to="/" />;
@@ -16,7 +16,11 @@ export default function Login() {
   //turn into handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchUserLogin({ username: "dannyjf", password: "password123" }));
+
+    const formData = new FormData(e.target);
+    const formValues = Object.fromEntries(formData.entries());
+    const { email, password } = formValues;
+    dispatch(fetchUserLogin({ email, password }));
   };
 
   return (
@@ -25,6 +29,8 @@ export default function Login() {
       {userAuthError && <p style={{ color: "red" }}>{userAuthError}</p>}
       {/*  */}
       <form onSubmit={handleSubmit}>
+        <input type="text" name="email" defaultValue="dan@dan.com" />
+        <input type="text" name="password" defaultValue="password123" />
         <input type="submit" />
       </form>
 

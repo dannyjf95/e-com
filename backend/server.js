@@ -15,7 +15,7 @@ process.on("warning", (warning) => {
   console.log("warning", warning.stack);
 });
 // console.log("here", process.argv[2]);
-// const LocalStrategy = require("passport-local").Strategy;
+
 const session = require("express-session"); //session
 const flash = require("connect-flash");
 
@@ -69,18 +69,19 @@ app.use(passport.session()); // Add this to manage user session
 //   return res.status(401).send("Unauthorized path, log in to gain access");
 // };
 
-app.get("/session", (req, res) => {
-  // if (req.user) console.log(req.user);
-  if (req.isAuthenticated()) {
-    res.json({ user: req.user }); // Passport automatically attaches `req.user`
-  } else {
-    res.json({ user: null });
-  }
-});
-  
+// app.use((req, res, next) => {
+//   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`, {
+//     headers: req.headers,
+//     body: req.body
+//   });
+//   next();
+// });
+
+
+
 app.use("/", async (req, res, next) => {
-  console.log("HERE@", req.session.guestCart ? req.session.userCart : "no  cart");
-  console.log(req.session)
+  // console.log("HERE@", req.session.guestCart ? req.session.userCart : "no  cart");
+  // console.log(req.session)
   req.isAdmin = true;
 
   if (!req.session.cart) {
@@ -101,6 +102,16 @@ app.use("/", async (req, res, next) => {
 
   return next();
 });
+//session check
+app.get("/session", (req, res) => {
+  // if (req.user) console.log(req.user);
+  if (req.isAuthenticated()) {
+    res.json({ user: req.user }); // Passport automatically attaches `req.user`
+  } else {
+    res.json({ user: null });
+  }
+});
+
 /**
  USER ROUTERS 
 */
@@ -156,7 +167,7 @@ app.use("/test", testRouter);
  *    
  HOME PAGE  
 */
- 
+
 app.get("/", async (req, res) => {
   const loginMessage = req.flash("login")[0];
   const loggedOutMessage = req.flash("loggedOut")[0];
