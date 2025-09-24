@@ -42,7 +42,11 @@ class User {
       where: { user_id: req.user ? req.user.id : req.params.id },
       raw: true,
     });
+    console.log("here", result);
     // return a.rows[0]
+    if ((result.count === 0)) {
+      return [];
+    }
     const itemCount = await this.getOrderItemCount(result.rows[0].id);
 
     return {

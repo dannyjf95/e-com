@@ -13,7 +13,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     //auto loggerinner
-    // dispatch(fetchUserLogin({ email: "dan", password: "dan@dan.com" }));
+    dispatch(fetchUserLogin({ email: "p", password: "p" }));
     dispatch(fetchUserSession());
   }, [dispatch]);
 

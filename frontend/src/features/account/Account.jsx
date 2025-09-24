@@ -17,13 +17,14 @@ export default function Account() {
   //data
   const { user, userAuthLoading } = useSelector(selectUserAuth);
   const { id } = user;
+  console.log(id)
   // checks/middleware
   if (!user) {
     return <Navigate to="/" />;
   }
   //on render
   useEffect(() => {
-    dispatch(fetchUserOrders({ endpoint: `users/${id}/orders` }));
+    dispatch(fetchUserOrders({ endpoint: `users/${user && user.id}/orders` }));
   }, [dispatch]);
 
   if (userAuthLoading) {

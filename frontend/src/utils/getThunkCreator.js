@@ -4,7 +4,7 @@ export const getThunkCreator = ({
   actionType = null,
   apiEndpoint = null,
   dataKey = null,
-  method = 'GET',
+  method = "GET",
   headers = null,
   body = null,
   // params = null,
@@ -21,7 +21,7 @@ export const getThunkCreator = ({
       };
 
       const response = params ? await fetch(`${apiEndpoint}/${path}`, options) : await fetch(`${apiEndpoint}`, options);
-      
+
       if (!response.ok) {
         const errorInfo = await response.json();
         console.error("❌ Fetch failed:", apiEndpoint, errorInfo);

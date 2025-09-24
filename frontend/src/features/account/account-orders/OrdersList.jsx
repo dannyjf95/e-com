@@ -9,11 +9,21 @@ export default function OrdersList() {
   // console.log();
   const { userOrders, userOrdersError, userOrdersLoading } = useSelector(selectUserOrders);
   const orders = userOrders["user orders"];
-
+  console.log(orders);
   if (userOrdersLoading) {
     return <div>Loading..</div>;
   }
+
+  if (orders.length === 0) {
+    return (
+      <div>
+        <p>Currently no orders</p>
+        <p>if you're expecting orders to be here <br/> please cheack again later, or contact support.</p>
+      </div>
+    );
+  }
   return (
+    // <>{orders.length === 0 && <p>no orders</p>}</>
     <div className="order-list">
       <div>
         {orders &&
