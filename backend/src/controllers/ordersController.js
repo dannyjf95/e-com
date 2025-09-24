@@ -8,7 +8,7 @@ const Order = require("../services/order/OrderServices");
 const orderInstance = new Order();
 const getAllOrders = async (req, res) => {
   if (!req.session.admin) {
-    req.session.admin = true;
+    // req.session.admin = true;
   }
   try {
     if (req.session.admin) {
@@ -44,7 +44,7 @@ const getOrderSummary = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    // return res.status(401).send("Unauthorized path, log in to gain access");
+    return res.status(401).send("Unauthorized path, log in to gain access");
   } catch (error) {
     console.error(error);
     return res

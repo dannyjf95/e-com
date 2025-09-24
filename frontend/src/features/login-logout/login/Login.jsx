@@ -29,8 +29,8 @@ export default function Login() {
       {userAuthError && <p style={{ color: "red" }}>{userAuthError}</p>}
       {/*  */}
       <form onSubmit={handleSubmit}>
-        <input type="text" name="email" defaultValue="dan@dan.com" />
-        <input type="text" name="password" defaultValue="password123" />
+        <input type="text" name="email" placeholder="email" required/>
+        <input type="password" name="password" placeholder="password" required/>
         <input type="submit" />
       </form>
 

@@ -4,26 +4,24 @@ export const getThunkCreator = ({
   actionType = null,
   apiEndpoint = null,
   dataKey = null,
-  // method = 'GET',
+  method = 'GET',
   headers = null,
   body = null,
   // params = null,
 }) => {
   return createAsyncThunk(actionType, async (params, thunkAPI) => {
-  
-    // console.log(params);
-    // {catename: 'footware', subcatname: 'running shoes'}
     try {
       const path = params ? Object.values(params).join("/") : "";
+
       const options = {
-        method: "GET",
+        method,
         headers: { "Content-Type": "application/json" },
         body: body ? JSON.stringify(body) : null,
         credentials: "include",
       };
 
       const response = params ? await fetch(`${apiEndpoint}/${path}`, options) : await fetch(`${apiEndpoint}`, options);
-
+      
       if (!response.ok) {
         const errorInfo = await response.json();
         console.error("❌ Fetch failed:", apiEndpoint, errorInfo);
@@ -31,8 +29,8 @@ export const getThunkCreator = ({
       }
 
       const data = await response.json();
-// console.log(data)
-      // console.log("✅ Fetch success:", apiEndpoint, data);
+      console.log(data);
+      console.log("✅ Fetch success:", apiEndpoint, data);
       return dataKey ? data[dataKey] : data;
     } catch (error) {
       console.error("❌ API Error:", apiEndpoint, error);

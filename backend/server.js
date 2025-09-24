@@ -62,12 +62,12 @@ app.use(passport.session()); // Add this to manage user session
 /*
  middleware temp
 */
-// const checkLoggedIn = (req, res, next) => {
-//   if (req.isAuthenticated()) {
-//     return next();
-//   }
-//   return res.status(401).send("Unauthorized path, log in to gain access");
-// };
+const checkLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.status(401).send("Unauthorized path, log in to gain access");
+};
 
 // app.use((req, res, next) => {
 //   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`, {
@@ -77,12 +77,10 @@ app.use(passport.session()); // Add this to manage user session
 //   next();
 // });
 
-
-
 app.use("/", async (req, res, next) => {
   // console.log("HERE@", req.session.guestCart ? req.session.userCart : "no  cart");
   // console.log(req.session)
-  req.isAdmin = true;
+  req.isAdmin = false;
 
   if (!req.session.cart) {
     req.session.cart = [];
@@ -105,6 +103,7 @@ app.use("/", async (req, res, next) => {
 //session check
 app.get("/session", (req, res) => {
   // if (req.user) console.log(req.user);
+  // console.log(req.isAdmin);
   if (req.isAuthenticated()) {
     res.json({ user: req.user }); // Passport automatically attaches `req.user`
   } else {

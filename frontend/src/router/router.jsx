@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import { Navigate, Route, createBrowserRouter, createRoutesFromElements} from "react-router-dom";
 // import Logout from "../features/login-logout/logout/Logout";
 
 //spinner
@@ -26,6 +26,16 @@ const OrderSummary = React.lazy(() => import("../features/account/account-orders
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      {/* unknown  paths */}
+      <Route
+        path="*"
+        element={
+          <div>
+            <Navigate to="/" />
+          </div>
+        }
+      />
+      {/*  */}
       {/* Protected / main app routes */}
       <Route
         path="/"
@@ -74,7 +84,7 @@ const router = createBrowserRouter(
               </div>
             }
           >
-            <Register/>
+            <Register />
           </Suspense>
         }
       />

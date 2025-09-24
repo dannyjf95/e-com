@@ -18,20 +18,22 @@ export default function SingUp() {
     const values = Object.fromEntries(formData.entries());
     const { name, username, email, password } = values;
     e.preventDefault();
-    dispatch(fetchUserRegister({ name, username, email, password })).then(() => {
+    dispatch(fetchUserRegister({ name, username, email, password }));
+    if (userCreatedSuccess) {
       navigate("/login");
-    });
+    }
   };
 
   return (
     <div>
-      <div>{userAuthError ?? null}</div>
+      {userAuthError && <p style={{ color: "red" }}>{userAuthError}</p>}
+      {/*  */}
       REGISTER
       <form onSubmit={handleSubmit}>
-        <input type="text" name="email" />
-        <input type="passowrd" name="password" />
-        <input type="text" name="username" />
-        <input type="text" name="name" />
+        <input type="text" name="email" placeholder="email" />
+        <input type="passowrd" name="password" placeholder="password" />
+        <input type="text" name="username" placeholder="username" />
+        <input type="text" name="name" placeholder="name" />
         <input type="submit" />
       </form>
     </div>
