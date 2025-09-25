@@ -11,15 +11,15 @@ class User {
       password,
     });
 
-    req.login(result, (err) => {
-      if (err) {
-        return next(err);
-      }
-      req.flash("usercreated", "Successfully created account");
-      return res.redirect("/");
-    });
+    // req.login(result, (err) => {
+    //   if (err) {
+    //     return next(err);
+    //   }
+    //   req.flash("usercreated", "Successfully created account");
+    //   return res.redirect("/login");
+    // });
     //if  wanting users to login after creating =  more safe but would be seen as "annoying"
-    // return res.redirect("/");
+    return res.redirect("/");
   }
 
   async getAllUsers() {
@@ -57,7 +57,7 @@ class User {
         orderTotal: orders.order_total,
       })),
     };
-  }
+  } 
 
   async getOrderItemCount(orderId) {
     return await models.Order_items.findAndCountAll({

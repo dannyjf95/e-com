@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Navigate, Route, createBrowserRouter, createRoutesFromElements} from "react-router-dom";
+import { Navigate, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 // import Logout from "../features/login-logout/logout/Logout";
 
 //spinner
@@ -72,6 +72,20 @@ const router = createBrowserRouter(
           </Suspense>
         }
       />
+      <Route
+        path="/login/google"
+        element={
+          <Suspense
+            fallback={
+              <div>
+                <Spinner />
+              </div>
+            }
+          >
+            {/* <Login /> */}
+          </Suspense>
+        }
+      />
 
       <Route
         path="/register"
@@ -88,6 +102,8 @@ const router = createBrowserRouter(
           </Suspense>
         }
       />
+      {/* logout */}
+      <Route path="/logout" element={<LogOut />}></Route>
 
       {/* Private access: account*/}
       <Route
@@ -124,9 +140,6 @@ const router = createBrowserRouter(
           }
         ></Route>
       </Route>
-
-      {/* logout */}
-      <Route path="/logout" element={<LogOut />}></Route>
     </>
   )
 );

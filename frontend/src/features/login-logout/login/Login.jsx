@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserLogin } from "./loginThunk";
 import { selectUserAuth } from "../userAuthSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -29,10 +30,15 @@ export default function Login() {
       {userAuthError && <p style={{ color: "red" }}>{userAuthError}</p>}
       {/*  */}
       <form onSubmit={handleSubmit}>
-        <input type="text" name="email" placeholder="email" required/>
-        <input type="password" name="password" placeholder="password" required/>
+        <input type="text" name="email" placeholder="email" required />
+        <input type="password" name="password" placeholder="password" required />
         <input type="submit" />
       </form>
+
+      <div>
+        <p>Login with google</p>
+        <a href={"http://localhost:5000/login/google"}>sign in with GOOGLE</a>
+      </div>
 
       {"Guest"}
     </div>

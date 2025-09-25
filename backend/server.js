@@ -151,7 +151,11 @@ app.use("/search", searchRouter);
 LOGIN / LOGOUT
 */
 const loginRouter = require("./src/routes/loginRoutes");
-app.use("/account/", loginRouter);
+app.use("/account", loginRouter);
+
+//GOOGLE
+const googleLogin = require("./src/routes/googleAuth");
+app.use("/login/google", googleLogin);
 
 const logoutRouter = require("./src/routes/logoutRoutes");
 app.use("/logout", logoutRouter);

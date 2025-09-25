@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserAuth } from "../login-logout/userAuthSlice";
 import { fetchUserRegister } from "./registerThunk";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function SingUp() {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ export default function SingUp() {
         <input type="text" name="name" placeholder="name" />
         <input type="submit" />
       </form>
+      <Link to={"/login"}>Login</Link>
     </div>
   );
 }

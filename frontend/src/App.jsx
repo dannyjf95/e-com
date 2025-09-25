@@ -13,13 +13,15 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     //auto loggerinner
-    dispatch(fetchUserLogin({ email: "p", password: "p" }));
+    // dispatch(fetchUserLogin({ email: "p", password: "p" }));
     dispatch(fetchUserSession());
   }, [dispatch]);
 
   const { userAuthLoading } = useSelector((state) => state.userAuth);
 
-  if (userAuthLoading) return <div>Loading...</div>;
+  if (userAuthLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Suspense

@@ -2,6 +2,7 @@ const express = require("express");
 const auth = express.Router();
 const passport = require("passport");
 const passport_local = require("../../config/passport-local");
+
 // LOGIN
 auth.post("/login", async (req, res, next) => {
   // console.log(req.body);

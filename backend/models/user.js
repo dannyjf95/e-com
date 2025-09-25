@@ -9,23 +9,28 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
       });
 
-      User.hasOne(models.Orders, { //just for individual checking
+      User.hasOne(models.Orders, {
+        //just for individual checking
         foreignKey: "user_id",
       });
 
       User.hasOne(models.Cart, {
-        foreignKey: 'user_id',
-        onDelete: 'CASCADE',
+        foreignKey: "user_id",
+        onDelete: "CASCADE",
       });
     }
   }
- 
+
   User.init(
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+      },
+      googleId: {
+        type: DataTypes.STRING,
+        unique: true,
       },
       name: {
         type: DataTypes.STRING,

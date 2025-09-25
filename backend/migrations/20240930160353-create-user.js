@@ -1,4 +1,7 @@
 "use strict";
+
+const { sequelize } = require("../models");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -8,6 +11,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
+      },
+      googleId: {
+        type: Sequelize.STRING,
+        unique: true,
+        // allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
@@ -40,6 +48,5 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("users");
-    
   },
 };
