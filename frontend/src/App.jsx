@@ -13,7 +13,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     //auto loggerinner
-    // dispatch(fetchUserLogin({ email: "p", password: "p" }));
+    // dispatch(fetchUserLogin({ email: "a", password: "a" }));
     dispatch(fetchUserSession());
   }, [dispatch]);
 
@@ -36,3 +36,4 @@ function App() {
   );
 }
 export default App;
+ 

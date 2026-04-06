@@ -6,9 +6,13 @@ const googleLogin = express.Router();
 const { User } = require("../../models");
 //env
 require("dotenv").config();
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
+console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET);
+console.log('SESSION_SECRET:', process.env.SESSION_SECRET);
+console.log('DB_NAME:', process.env.DB_NAME); 
 //google login strategy
 const GoogleStrategy = require("passport-google-oidc");
-
+  
 passport.use(
   new GoogleStrategy(
     {
@@ -32,7 +36,7 @@ passport.use(
           });
         }
 
-        return cb(null, user);
+        return cb(null, user); 
       } catch (e) {
         return cb(e);
       }
